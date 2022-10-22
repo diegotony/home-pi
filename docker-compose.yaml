@@ -1,0 +1,42 @@
+version: "3.3"
+
+x-user: &user
+  user: 1000:1000 # default
+ 
+x-environment: &environment
+  environment:
+    - INIT_ASSETS=0 # default
+    - PUID=1000
+    - PGID=1000
+    - TZ=America/Guayaquil
+    - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
+    - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
+
+x-policy: &policy
+    restart: unless-stopped
+
+services:
+  local:
+    image: b4bz/homer
+    container_name: local
+    <<: *user 
+    <<: *environment 
+    <<: *policy 
+    ports:
+        - 80:8080
+    volumes:
+        - ${REPO_CONFIG_DIR}/assets:/www/assets
+
+
+  calibre-web:
+    image: lscr.io/linuxserver/calibre-web:latest
+    container_name: calibre-web
+    <<: *user 
+    <<: *environment 
+    <<: *policy 
+    ports:
+      - 8083:8083
+
+    volumes:
+      - ${SERVER_DATA_DIR}/calibre-web/config:/config
+      - ${SERVER_STORAGE_DIR}/books:/books
