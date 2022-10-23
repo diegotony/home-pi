@@ -5,15 +5,19 @@ x-user: &user
  
 x-environment: &environment
   environment:
-    - INIT_ASSETS=0 # default
+    # - INIT_ASSETS=0 # default
     - PUID=1000
     - PGID=1000
     - TZ=America/Guayaquil
-    - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
-    - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
+    # - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
+    # - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
 
 x-policy: &policy
     restart: unless-stopped
+
+x-security: &security
+    security_opt:
+      - no-new-privileges:true
 
 services:
   local:
@@ -23,20 +27,172 @@ services:
     <<: *environment 
     <<: *policy 
     ports:
-        - 80:8080
+      - 80:8080
     volumes:
-        - ${REPO_CONFIG_DIR}/assets:/www/assets
+      - ${REPO_CONFIG_DIR}/assets:/www/assets
 
+
+# Streaming
+
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    <<: *environment
+    <<: *policy
+    volumes:
+      - ${SERVER_DATA_DIR}/bazarr/config:/config
+      - ${SERVER_STORAGE_DIR}/movies:/movies #optional
+      - ${SERVER_STORAGE_DIR}/tv:/tv #optional
+    ports:
+      - 6001:6767
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    <<: *environment
+    <<: *policy
+    volumes:
+      - ${SERVER_DATA_DIR}/overseerr/config:/config
+      - ${SERVER_STORAGE_DIR}/movies:/movies #optional
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
+    ports:
+      - 6002:7878
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    <<: *environment
+    <<: *policy
+    volumes:
+      - ${SERVER_DATA_DIR}/sonarr/config:/config
+      - ${SERVER_STORAGE_DIR}/tv:/tv #optional
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
+    ports:
+      - 6003:8989
+
+# Indexers
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:develop
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /path/to/data:/config
+    ports:
+      - 7001:9696
+    restart: unless-stopped
+
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    <<: *environment
+    <<: *policy
+    volumes:
+      - ${SERVER_DATA_DIR}/jackett/config:/config
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
+    ports:
+      - 7002:9117
+
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    <<: *environment 
+    <<: *policy
+
+    volumes:
+      - ${SERVER_DATA_DIR}/transmission/config:/config
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads
+      - ${SERVER_STORAGE_DIR}/watch:/watch
+    ports:
+      - 7003:9091
+      - 51413:51413
+      - 51413:51413/udp
+
+# Utils
+
+  filebrowser:
+    image: filebrowser/filebrowser:s6
+    container_name: filebrowser
+    <<: *environment 
+    <<: *policy
+    <<: *security
+    ports:
+      - 8001:80
+    volumes:
+      - ${SERVER_STORAGE_DIR}:/srv
+      - ${REPO_CONFIG_DIR}/assets/settings.json:/config/settings.json
+      - ${REPO_CONFIG_DIR}/assets/filebrowser.db:/database/filebrowser.db
+
+  ubooquity:
+    image: lscr.io/linuxserver/ubooquity:latest
+    container_name: ubooquity
+    <<: *environment
+    <<: *policy
+    volumes:
+      - ${SERVER_DATA_DIR}/ubooquity/config:/config
+      - ${SERVER_STORAGE_DIR}/books:/books
+      - ${SERVER_STORAGE_DIR}/comics:/comics
+      - ${SERVER_STORAGE_DIR}:/files
+    ports:
+      - 8002:2202
+      - 8003:2203
 
   calibre-web:
     image: lscr.io/linuxserver/calibre-web:latest
     container_name: calibre-web
-    <<: *user 
     <<: *environment 
     <<: *policy 
     ports:
-      - 8083:8083
+      - 8004:8083
 
     volumes:
       - ${SERVER_DATA_DIR}/calibre-web/config:/config
       - ${SERVER_STORAGE_DIR}/books:/books
+
+  kuma:
+    container_name: kuma
+    image: louislam/uptime-kuma:1
+    <<: *environment 
+    <<: *policy 
+    volumes:
+      -  ${SERVER_DATA_DIR}/uptime-kuma/config:/app/data
+    ports:
+      - "8005:3001"
+  
+  webtop:
+    image: lscr.io/linuxserver/webtop:latest
+    container_name: webtop
+    <<: *environment 
+    <<: *policy 
+    volumes:
+      - ${SERVER_DATA_DIR}/webtop/config:/config
+    ports:
+      - 8006:3000
+
+# System
+
+  whoami:
+    image: containous/whoami:latest
+    container_name: whoami
+    <<: *user 
+    <<: *environment 
+    <<: *policy 
+    ports:
+      - 9001:80
+
+  librespeed:
+    image: lscr.io/linuxserver/librespeed:latest
+    container_name: librespeed
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - PASSWORD=PASSWORD
+    volumes:
+      - ${SERVER_DATA_DIR}/librespeed/config:/config
+    ports:
+      - 9002:80
+    restart: unless-stopped

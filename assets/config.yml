@@ -107,121 +107,97 @@ links:
     icon: "fas fa-book"
     url: "https://www.constant1n396.com/"
 
-# Services
-# First level array represents a group.
-# Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
 services:
   - name: "Streaming"
-    # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
-    # logo: "path/to/logo"
     items:
       - name: "Bazarr"
         subtitle: "Subtitles"
         tag: "streaming"
-        url: "http://bazarr.localhost"
+        url: "http://inverse.local:6001"
         target: "_blank" # optional html tag target attribute
 
       - name: "Radarr"
         subtitle: "Movies"
         tag: "streaming"
-        url: "http://radarr.localhost"
-        target: "_blank" # optional html tag target attribute
-
-      - name: "prowlarr"
-        subtitle: "Indexers"
-        keywords: "self hosted reddit" # optional keyword used for searching purpose
-        url: "http://prowlarr.localhost"
+        url: "http://inverse.local:6002"
         target: "_blank" # optional html tag target attribute
 
       - name: "sonarr"
         subtitle: "Series"
-        url: "http://sonarr.localhost"
+        tag: "streaming"
+        url: "http://inverse.local:6003"
         target: "_blank" # optional html tag target attribute
 
-  - name: "Downloads"
+  - name: "Downloads and Indexers"
     items:
+      - name: "prowlarr"
+        subtitle: "Indexers"
+        keywords: "self hosted reddit" # optional keyword used for searching purpose
+        tag: "indexer"
+        url: "http://inverse.local:7001"
+        target: "_blank" # optional html tag target attribute
+
+      - name: "jackett"
+        subtitle: "Indexers" # optional, if no subtitle is defined, PiHole statistics will be shown
+        tag: "indexer"
+        url: "http://inverse.local:7002"
+        target: "_blank" # optional html a tag target attribute
+
       - name: "transmission"
         subtitle: "Torrents" # optional, if no subtitle is defined, PiHole statistics will be shown
-        tag: "other"
-        url: "http://transmission.localhost"
+        tag: "downloads"
+        url: "http://inverse.local:7003"
         target: "_blank" # optional html a tag target attribute
-        # class: "green" # optional custom CSS class for card, useful with custom stylesheet
-        # background: red # optional color for card to set color directly without custom stylesheet
-  - name: "Utils"
-    items:
-      - name: "Komga"
-        subtitle: "Comics" # optional, if no subtitle is defined, PiHole statistics will be shown
-        tag: "other"
-        url: "http://komga.localhost"
-        target: "_blank" # optional html a tag target attribute
-        # class: "green" # optional custom CSS class for card, useful with custom stylesheet
-        # background: red # optional color for card to set color directly without custom stylesheet
-      - name: "emulatorjs"
-        subtitle: "Games" # optional, if no subtitle is defined, PiHole statistics will be shown
-        tag: "other"
-        url: "http://emulatorjs.localhost"
-        target: "_blank" # optional html a tag target attribute
-        # class: "green" # optional custom CSS class for card, useful with custom stylesheet
-        # background: red # optional color for card to set color directly without custom stylesheet
-      - name: "calibre-web"
-        subtitle: "Books" # optional, if no subtitle is defined, PiHole statistics will be shown
-        tag: "other"
-        url: "http://inverse.local:8083"
         # class: "green" # optional custom CSS class for card, useful with custom stylesheet
         # background: red # optional color for card to set color directly without custom stylesheet
 
-  - name: "Code"
+  - name: "Utils"
     items:
-      - name: "webtop"
-        subtitle: "Test Machine" # optional, if no subtitle is defined, PiHole statistics will be shown
-        tag: "webtop"
-        url: "http://webtop.localhost"
-        type: "test" # optional, loads a specific component that provides extra features. MUST MATCH a file name (without file extension) available in `src/components/services`
+      - name: "filebrowser"
+        subtitle: "Files" # optional, if no subtitle is defined, PiHole statistics will be shown
+        tag: "files"
+        url: "http://inverse.local:8001/"
         target: "_blank" # optional html a tag target attribute
         # class: "green" # optional custom CSS class for card, useful with custom stylesheet
         # background: red # optional color for card to set color directly without custom stylesheet
-      - name: "code"
-        subtitle: "VS Code" # optional, if no subtitle is defined, PiHole statistics will be shown
-        tag: "code"
-        url: "http://code.localhost"
+
+      - name: "ubooquity"
+        subtitle: "Comics" # optional, if no subtitle is defined, PiHole statistics will be shown
+        tag: "files"
+        url: "http://inverse.local:8002/ubooquity"
         target: "_blank" # optional html a tag target attribute
-        # class: "green" # optional custom CSS class for card, useful with custom stylesheet
-        # background: red # optional color for card to set color directly without custom stylesheet
+
+      - name: "calibre-web"
+        subtitle: "Books" # optional, if no subtitle is defined, PiHole statistics will be shown
+        tag: "files"
+        url: "http://inverse.local:8004"
+
       - name: "kuma"
         subtitle: "Uptime Kuma" # optional, if no subtitle is defined, PiHole statistics will be shown
-        tag: "test"
-        url: "http://kuma.localhost"
+        tag: "up-time"
+        url: "http://inverse.local:8005"
         target: "_blank" # optional html a tag target attribute
-        # class: "green" # optional custom CSS class for card, useful with custom stylesheet
-        # background: red # optional color for card to set color directly without custom stylesheet
+ 
+      - name: "webtop"
+        subtitle: "Test Machine" # optional, if no subtitle is defined, PiHole statistics will be shown
+        tag: "test"
+        url: "http://inverse.local:8006"
+        type: "test" # optional, loads a specific component that provides extra features. MUST MATCH a file name (without file extension) available in `src/components/services`
+        target: "_blank" # optional html a tag target attribute
+
+# System
 
   - name: "System"
     items:
+
+      - name: "whoami"
+        subtitle: "whoami" # optional, if no subtitle is defined, PiHole statistics will be shown
+        tag: "system"
+        url: "http://inverse.local:9001"
+        target: "_blank" # optional html a tag target attribute
+
       - name: "librespeed"
         subtitle: "Test connection" # optional, if no subtitle is defined, PiHole statistics will be shown
         tag: "system"
-        url: "http://speed.localhost"
+        url: "http://inverse.local:9002"
         target: "_blank" # optional html a tag target attribute
-        # class: "green" # optional custom CSS class for card, useful with custom stylesheet
-        # background: red # optional color for card to set color directly without custom stylesheet
-      - name: "filebrowser"
-        subtitle: "Files" # optional, if no subtitle is defined, PiHole statistics will be shown
-        tag: "system"
-        url: "http://files.localhost"
-        target: "_blank" # optional html a tag target attribute
-        # class: "green" # optional custom CSS class for card, useful with custom stylesheet
-        # background: red # optional color for card to set color directly without custom stylesheet
-      - name: "jackett"
-        subtitle: "Indexers" # optional, if no subtitle is defined, PiHole statistics will be shown
-        tag: "system"
-        url: "http://jackett.localhost"
-        target: "_blank" # optional html a tag target attribute
-        # class: "green" # optional custom CSS class for card, useful with custom stylesheet
-        # background: red # optional color for card to set color directly without custom stylesheet
-      - name: "stats"
-        subtitle: "Stats" # optional, if no subtitle is defined, PiHole statistics will be shown
-        tag: "system"
-        url: "http://stats.localhost"
-        target: "_blank" # optional html a tag target attribute
-        # class: "green" # optional custom CSS class for card, useful with custom stylesheet
-        # background: red # optional color for card to set color directly without custom stylesheet#
