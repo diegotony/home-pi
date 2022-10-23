@@ -201,3 +201,22 @@ services:
         tag: "system"
         url: "http://inverse.local:9002"
         target: "_blank" # optional html a tag target attribute
+
+      - name: "adguardhome"
+        subtitle: "Test connection" # optional, if no subtitle is defined, PiHole statistics will be shown
+        tag: "system"
+        url: "http://inverse.local:81"
+        target: "_blank" # optional html a tag target attribute
+
+
+      # - name: "dash"
+      #   subtitle: "Test connection" # optional, if no subtitle is defined, PiHole statistics will be shown
+      #   tag: "system"
+      #   url: "http://inverse.local/linuxdash/app"
+      #   target: "_blank" # optional html a tag target attribute
+
+      # - name: "netdata"
+      #   subtitle: "Test connection" # optional, if no subtitle is defined, PiHole statistics will be shown
+      #   tag: "system"
+      #   url: "http://inverse.local:19999"
+      #   target: "_blank" # optional html a tag target attribute

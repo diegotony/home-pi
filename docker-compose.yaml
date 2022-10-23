@@ -186,13 +186,26 @@ services:
   librespeed:
     image: lscr.io/linuxserver/librespeed:latest
     container_name: librespeed
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/London
-      - PASSWORD=PASSWORD
+    <<: *environment 
+    <<: *policy 
     volumes:
       - ${SERVER_DATA_DIR}/librespeed/config:/config
     ports:
       - 9002:80
-    restart: unless-stopped
+
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome
+    <<: *environment 
+    <<: *policy 
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 784:784/udp
+      - 853:853/tcp
+      - 3000:3000/tcp
+      - 81:80/tcp
+      - 443:443/tcp
+    volumes:
+      - ${SERVER_DATA_DIR}/adguardhome/work:/opt/adguardhome/work
+      - ${SERVER_DATA_DIR}/adguardhome/config:/opt/adguardhome/conf
