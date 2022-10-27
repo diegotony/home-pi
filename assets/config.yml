@@ -122,38 +122,44 @@ services:
         url: "http://inverse.local:6002"
         target: "_blank" # optional html tag target attribute
 
-      - name: "sonarr"
+      - name: "Sonarr"
         subtitle: "Series"
         tag: "streaming"
         url: "http://inverse.local:6003"
         target: "_blank" # optional html tag target attribute
 
+
   - name: "Downloads and Indexers"
     items:
-      - name: "prowlarr"
+      - name: "Prowlarr"
         subtitle: "Indexers"
         keywords: "self hosted reddit" # optional keyword used for searching purpose
         tag: "indexer"
         url: "http://inverse.local:7001"
         target: "_blank" # optional html tag target attribute
 
-      - name: "jackett"
-        subtitle: "Indexers" # optional, if no subtitle is defined, PiHole statistics will be shown
-        tag: "indexer"
-        url: "http://inverse.local:7002"
-        target: "_blank" # optional html a tag target attribute
-
       - name: "transmission"
         subtitle: "Torrents" # optional, if no subtitle is defined, PiHole statistics will be shown
         tag: "downloads"
         url: "http://inverse.local:7003"
         target: "_blank" # optional html a tag target attribute
-        # class: "green" # optional custom CSS class for card, useful with custom stylesheet
-        # background: red # optional color for card to set color directly without custom stylesheet
+
+      - name: "Flexget"
+        subtitle: "plex" # optional, if no subtitle is defined, PiHole statistics will be shown
+        tag: "downloads"
+        url: "http://inverse.local:5050"
+        target: "_blank" # optional html a tag target attribute
+
+      - name: "tautulli"
+        subtitle: "plex" # optional, if no subtitle is defined, PiHole statistics will be shown
+        tag: "downloads"
+        url: "http://inverse.local:7004"
+        target: "_blank" # optional html a tag target attribute
+
 
   - name: "Utils"
     items:
-      - name: "filebrowser"
+      - name: "Files"
         subtitle: "Files" # optional, if no subtitle is defined, PiHole statistics will be shown
         tag: "files"
         url: "http://inverse.local:8001/"
@@ -161,28 +167,33 @@ services:
         # class: "green" # optional custom CSS class for card, useful with custom stylesheet
         # background: red # optional color for card to set color directly without custom stylesheet
 
-      - name: "ubooquity"
+      - name: "Ubooquity"
         subtitle: "Comics" # optional, if no subtitle is defined, PiHole statistics will be shown
         tag: "files"
         url: "http://inverse.local:8002/ubooquity"
         target: "_blank" # optional html a tag target attribute
 
-      - name: "calibre-web"
+      - name: "Calibre"
         subtitle: "Books" # optional, if no subtitle is defined, PiHole statistics will be shown
         tag: "files"
         url: "http://inverse.local:8004"
 
-      - name: "kuma"
+      - name: "Kuma"
         subtitle: "Uptime Kuma" # optional, if no subtitle is defined, PiHole statistics will be shown
         tag: "up-time"
         url: "http://inverse.local:8005"
         target: "_blank" # optional html a tag target attribute
  
-      - name: "webtop"
+      - name: "Webtop"
         subtitle: "Test Machine" # optional, if no subtitle is defined, PiHole statistics will be shown
-        tag: "test"
+        tag: "webtop"
         url: "http://inverse.local:8006"
-        type: "test" # optional, loads a specific component that provides extra features. MUST MATCH a file name (without file extension) available in `src/components/services`
+        target: "_blank" # optional html a tag target attribute
+
+      - name: "Readarr"
+        subtitle: "Test Machine" # optional, if no subtitle is defined, PiHole statistics will be shown
+        tag: "read"
+        url: "http://inverse.local:8007"
         target: "_blank" # optional html a tag target attribute
 
 # System
@@ -190,33 +201,20 @@ services:
   - name: "System"
     items:
 
-      - name: "whoami"
+      - name: "Whoami"
         subtitle: "whoami" # optional, if no subtitle is defined, PiHole statistics will be shown
         tag: "system"
         url: "http://inverse.local:9001"
         target: "_blank" # optional html a tag target attribute
 
-      - name: "librespeed"
+      - name: "Librespeed"
         subtitle: "Test connection" # optional, if no subtitle is defined, PiHole statistics will be shown
         tag: "system"
         url: "http://inverse.local:9002"
         target: "_blank" # optional html a tag target attribute
 
-      - name: "adguardhome"
+      - name: "Adguardhome"
         subtitle: "Test connection" # optional, if no subtitle is defined, PiHole statistics will be shown
         tag: "system"
         url: "http://inverse.local:81"
         target: "_blank" # optional html a tag target attribute
-
-
-      # - name: "dash"
-      #   subtitle: "Test connection" # optional, if no subtitle is defined, PiHole statistics will be shown
-      #   tag: "system"
-      #   url: "http://inverse.local/linuxdash/app"
-      #   target: "_blank" # optional html a tag target attribute
-
-      # - name: "netdata"
-      #   subtitle: "Test connection" # optional, if no subtitle is defined, PiHole statistics will be shown
-      #   tag: "system"
-      #   url: "http://inverse.local:19999"
-      #   target: "_blank" # optional html a tag target attribute

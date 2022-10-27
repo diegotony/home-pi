@@ -1,0 +1,88 @@
+2022-10-24 01:48:25 INFO     web_server_daemon                 Running web server at IP 0.0.0.0:5050
+2022-10-24 01:48:25 INFO     web_server_daemon                 Initiating API
+2022-10-24 01:48:25 INFO     web_server_daemon                 Registering WebUI v2
+2022-10-24 01:48:25 INFO     web_server                    Web server started at http://172.18.0.11:5050
+2022-10-24 01:48:25 INFO     web_server                    API available at http://172.18.0.11:5050/api
+2022-10-24 01:48:25 INFO     web_server                    WebUI (v2) available at http://172.18.0.11:5050/
+2022-10-24 02:36:50 INFO     manager                       Got SIGTERM. Shutting down.
+2022-10-24 02:36:51 INFO     web_server                    Shutting down web server
+2022-10-24 02:38:08 INFO     web_server_daemon                 Running web server at IP 0.0.0.0:5050
+2022-10-24 02:38:08 INFO     web_server_daemon                 Initiating API
+2022-10-24 02:38:08 INFO     web_server_daemon                 Registering WebUI v2
+2022-10-24 02:38:08 INFO     web_server                    Web server started at http://172.18.0.8:5050
+2022-10-24 02:38:08 INFO     web_server                    API available at http://172.18.0.8:5050/api
+2022-10-24 02:38:08 INFO     web_server                    WebUI (v2) available at http://172.18.0.8:5050/
+2022-10-24 02:39:47 INFO     manager                       Got SIGTERM. Shutting down.
+2022-10-24 02:39:47 INFO     web_server                    Shutting down web server
+2022-10-24 02:41:21 INFO     web_server_daemon                 Running web server at IP 0.0.0.0:5050
+2022-10-24 02:41:21 INFO     web_server_daemon                 Initiating API
+2022-10-24 02:41:21 INFO     web_server_daemon                 Registering WebUI v2
+2022-10-24 02:41:21 INFO     web_server                    Web server started at http://172.18.0.3:5050
+2022-10-24 02:41:21 INFO     web_server                    API available at http://172.18.0.3:5050/api
+2022-10-24 02:41:21 INFO     web_server                    WebUI (v2) available at http://172.18.0.3:5050/
+2022-10-24 04:50:04 INFO     manager                       Got SIGTERM. Shutting down.
+2022-10-24 04:50:05 INFO     web_server                    Shutting down web server
+2022-10-24 04:54:15 INFO     web_server_daemon                 Running web server at IP 0.0.0.0:5050
+2022-10-24 04:54:15 INFO     web_server_daemon                 Initiating API
+2022-10-24 04:54:15 INFO     web_server_daemon                 Registering WebUI v2
+2022-10-24 04:54:15 INFO     web_server                    Web server started at http://172.18.0.8:5050
+2022-10-24 04:54:15 INFO     web_server                    API available at http://172.18.0.8:5050/api
+2022-10-24 04:54:15 INFO     web_server                    WebUI (v2) available at http://172.18.0.8:5050/
+2022-10-24 04:55:51 INFO     manager                       Got SIGTERM. Shutting down.
+2022-10-24 04:55:51 INFO     web_server                    Shutting down web server
+2022-10-24 04:57:46 INFO     web_server_daemon                 Running web server at IP 0.0.0.0:5050
+2022-10-24 04:57:46 INFO     web_server_daemon                 Initiating API
+2022-10-24 04:57:46 INFO     web_server_daemon                 Registering WebUI v2
+2022-10-24 04:57:46 INFO     web_server                    Web server started at http://172.19.0.19:5050
+2022-10-24 04:57:46 INFO     web_server                    API available at http://172.19.0.19:5050/api
+2022-10-24 04:57:46 INFO     web_server                    WebUI (v2) available at http://172.19.0.19:5050/
+2022-10-24 05:39:44 INFO     manager                       Got SIGTERM. Shutting down.
+2022-10-24 05:39:44 INFO     web_server                    Shutting down web server
+2022-10-24 05:41:41 INFO     web_server_daemon                 Running web server at IP 0.0.0.0:5050
+2022-10-24 05:41:41 INFO     web_server_daemon                 Initiating API
+2022-10-24 05:41:41 INFO     web_server_daemon                 Registering WebUI v2
+2022-10-24 05:41:41 INFO     web_server                    Web server started at http://172.20.0.3:5050
+2022-10-24 05:41:41 INFO     web_server                    API available at http://172.20.0.3:5050/api
+2022-10-24 05:41:41 INFO     web_server                    WebUI (v2) available at http://172.20.0.3:5050/
+2022-10-24 05:42:37 INFO     manager                       Got SIGTERM. Shutting down.
+2022-10-24 05:42:37 INFO     web_server                    Shutting down web server
+2022-10-25 15:52:04 INFO     web_server_daemon                 Running web server at IP 0.0.0.0:5050
+2022-10-25 15:52:04 INFO     web_server_daemon                 Initiating API
+2022-10-25 15:52:04 INFO     web_server_daemon                 Registering WebUI v2
+2022-10-25 15:52:05 INFO     web_server                    Web server started at http://172.21.0.4:5050
+2022-10-25 15:52:05 INFO     web_server                    API available at http://172.21.0.4:5050/api
+2022-10-25 15:52:05 INFO     web_server                    WebUI (v2) available at http://172.21.0.4:5050/
+2022-10-25 15:52:49 INFO     manager                       Got SIGTERM. Shutting down.
+2022-10-25 15:52:49 INFO     web_server                    Shutting down web server
+2022-10-25 15:54:46 INFO     web_server_daemon                 Running web server at IP 0.0.0.0:5050
+2022-10-25 15:54:46 INFO     web_server_daemon                 Initiating API
+2022-10-25 15:54:46 INFO     web_server_daemon                 Registering WebUI v2
+2022-10-25 15:54:46 INFO     web_server                    Web server started at http://172.18.0.4:5050
+2022-10-25 15:54:46 INFO     web_server                    API available at http://172.18.0.4:5050/api
+2022-10-25 15:54:46 INFO     web_server                    WebUI (v2) available at http://172.18.0.4:5050/
+2022-10-26 03:40:15 INFO     manager                       Got SIGTERM. Shutting down.
+2022-10-26 03:40:15 INFO     web_server                    Shutting down web server
+2022-10-26 03:42:12 INFO     web_server_daemon                 Running web server at IP 0.0.0.0:5050
+2022-10-26 03:42:12 INFO     web_server_daemon                 Initiating API
+2022-10-26 03:42:12 INFO     web_server_daemon                 Registering WebUI v2
+2022-10-26 03:42:12 INFO     web_server                    Web server started at http://172.19.0.3:5050
+2022-10-26 03:42:12 INFO     web_server                    API available at http://172.19.0.3:5050/api
+2022-10-26 03:42:12 INFO     web_server                    WebUI (v2) available at http://172.19.0.3:5050/
+2022-10-26 04:06:13 INFO     manager                       Got SIGTERM. Shutting down.
+2022-10-26 04:06:14 INFO     web_server                    Shutting down web server
+2022-10-26 04:22:00 INFO     web_server_daemon                 Running web server at IP 0.0.0.0:5050
+2022-10-26 04:22:00 INFO     web_server_daemon                 Initiating API
+2022-10-26 04:22:00 INFO     web_server_daemon                 Registering WebUI v2
+2022-10-26 04:22:00 INFO     web_server                    Web server started at http://172.19.0.19:5050
+2022-10-26 04:22:00 INFO     web_server                    API available at http://172.19.0.19:5050/api
+2022-10-26 04:22:00 INFO     web_server                    WebUI (v2) available at http://172.19.0.19:5050/
+2022-10-26 04:28:52 INFO     manager                       Got SIGTERM. Shutting down.
+2022-10-26 04:28:52 INFO     web_server                    Shutting down web server
+2022-10-26 04:31:39 INFO     web_server_daemon                 Running web server at IP 0.0.0.0:5050
+2022-10-26 04:31:39 INFO     web_server_daemon                 Initiating API
+2022-10-26 04:31:39 INFO     web_server_daemon                 Registering WebUI v2
+2022-10-26 04:31:39 INFO     web_server                    Web server started at http://172.19.0.19:5050
+2022-10-26 04:31:39 INFO     web_server                    API available at http://172.19.0.19:5050/api
+2022-10-26 04:31:39 INFO     web_server                    WebUI (v2) available at http://172.19.0.19:5050/
+2022-10-26 05:32:29 INFO     manager                       Got SIGTERM. Shutting down.
+2022-10-26 05:32:30 INFO     web_server                    Shutting down web server
