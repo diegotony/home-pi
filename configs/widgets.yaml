@@ -3,10 +3,26 @@
 # https://github.com/benphelps/homepage/wiki/Information-Widgets
 
 - resources:
+    label: System
+    expanded: true
     cpu: true
     memory: true
     disk: /
 
+# - resources:
+#     label: Storage
+#     expanded: true
+#     disk: /mnt/f3a032ea-67e9-4a6c-b858-b17c8882d45a
+
+
 - search:
-    provider: duckduckgo
+    provider: google
     target: _blank
+    focus: true
+- datetime:
+    text_size:  4xl
+    format:
+      timeStyle: short
+      dateStyle: short
+      hour12: false
+

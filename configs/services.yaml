@@ -1,56 +1,76 @@
-- Streaming:
 
+
+- Streaming:
     - radarr:
         href: http://inverse.local:6002
         container: radarr
-        server: http://inverse.local 
+        server: my-docker
         widget:
           type: radarr
           url: http://inverse.local:6002
           key: f93184e22792464c9c364f291e09f29c
+
+
     - sonarr:
         href: http://inverse.local:6003
         container: sonarr
-        server: http://inverse.local
+        server: my-docker
         widget:
           type: sonarr
           url: http://inverse.local:6003
           key: a5d583908e6341c6b9015f1652b001c2
+
+
+    - jellyfin:
+        href: http://inverse.local:8096
+        container: jellyfin
+        server: my-docker
+        widget:
+            type: sonarr
+            url: http://inverse.local:8096
+            key: d195e389d696446e80cea6f6791df84a
+
+
 
     # - Bazarr:
     #     href: http://localhost/
 
 - Downloads:
     - prowlarr:
+        server: my-docker
         href: http://inverse.local:7001
         container: prowlarr
 
     - transmission:
+        server: my-docker
         href: http://inverse.local:7003
         container: transmission
-
-
 
 - Utils:
     - Files:
         href: http://inverse.local:8001
         container: filebrowser
+        server: my-docker
 
     - Komga:
         href: http://inverse.local:8002
+        server: my-docker
         container: komga
 
     - Calibre:
         href: http://inverse.local:8004
         container: calibre
+        server: my-docker
 
     - Kuma:
         href: http://inverse.local:8005
         container: kuma
+        server: my-docker
 
     - Firefox:
         href: http://inverse.local:8009
         container: firefox
+        server: my-docker
 
     # - Readarr:
     #     href: http://localhost/
@@ -61,10 +81,12 @@
     - Whoami:
         href: http://inverse.local:9001
         container: whoami
+        server: my-docker
 
     - Librespeed:
         href: http://inverse.local:9002
         container: librespeed
+        server: my-docker
 
     # - Adguardhome:
     #     href: http://localhost/
