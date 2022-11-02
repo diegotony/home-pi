@@ -19,36 +19,56 @@ x-security: &security
     security_opt:
       - no-new-privileges:true
 
+x-network: &network
+    networks:
+      - home-network
+networks:
+  home-network:
+    driver: bridge
+
 services:
+  # local:
+  #   image: b4bz/homer
+  #   container_name: local
+  #   <<: *user 
+  #   <<: *environment 
+  #   <<: *policy 
+  #   <<: *network 
+
+  #   ports:
+  #     - 80:8080
+  #   volumes:
+  #     - ${REPO_CONFIG_DIR}/assets:/www/assets
+
   local:
-    image: b4bz/homer
+    image: ghcr.io/benphelps/homepage:latest
     container_name: local
     <<: *user 
     <<: *environment 
     <<: *policy 
+    <<: *network 
+
     ports:
-      - 80:8080
+      - 80:3000
     volumes:
-      - ${REPO_CONFIG_DIR}/assets:/www/assets
+      - ${REPO_CONFIG_DIR}/configs:/app/config # Make sure your local config directory exists
+      - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
 
 
 # Streaming
 
-  bazarr:
-    image: lscr.io/linuxserver/bazarr:latest
-    container_name: bazarr
-    <<: *environment
-    <<: *policy
-    # labels:
-    #   plugsy.name: "bazarr"
-    #   plugsy.parents: "Todo"
-    #   plugsy.icon: "@styled-icons/feather/Server"
-    volumes:
-      - ${SERVER_DATA_DIR}/bazarr/config:/config
-      - ${SERVER_STORAGE_DIR}/movies:/movies #optional
-      - ${SERVER_STORAGE_DIR}/tv:/tv #optional
-    ports:
-      - 6001:6767
+  # bazarr:
+  #   image: lscr.io/linuxserver/bazarr:latest
+  #   container_name: bazarr
+  #   <<: *environment
+  #   <<: *policy
+  #   <<: *network 
+  #   volumes:
+  #     - ${SERVER_DATA_DIR}/bazarr/config:/config
+  #     - ${SERVER_STORAGE_DIR}/movies:/movies #optional
+  #     - ${SERVER_STORAGE_DIR}/tv:/tv #optional
+  #   ports:
+  #     - 6001:6767
 
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -56,6 +76,7 @@ services:
     <<: *environment
     <<: *policy
     <<: *security
+    <<: *network 
     volumes:
       - ${SERVER_DATA_DIR}/overseerr/config:/config
       - ${SERVER_STORAGE_DIR}/movies:/movies #optional
@@ -68,6 +89,7 @@ services:
     container_name: sonarr
     <<: *environment
     <<: *policy
+    <<: *network 
 
     volumes:
       - ${SERVER_DATA_DIR}/sonarr/config:/config
@@ -75,6 +97,20 @@ services:
       - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
     ports:
       - 6003:8989
+
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    <<: *environment
+    <<: *policy
+    network_mode: 'host'
+    ports:
+      -  8096:8096/tcp
+    volumes:
+      - ${SERVER_DATA_DIR}/jellyfin/config:/config
+      - ${SERVER_DATA_DIR}/jellyfin/cache:/cache
+      - ${SERVER_STORAGE_DIR}:/media #optional
+      - ${SERVER_DATA_DIR}/jellyfin/media2:/media2:ro
 
 # Indexers
 
@@ -85,6 +121,7 @@ services:
     <<: *environment
     <<: *policy
     <<: *security
+    <<: *network 
 
     volumes:
       -  ${SERVER_DATA_DIR}/prowlarr/config:/config
@@ -97,6 +134,7 @@ services:
     container_name: transmission
     <<: *environment 
     <<: *policy
+    <<: *network 
 
     volumes:
       - ${SERVER_DATA_DIR}/transmission/config:/config
@@ -106,31 +144,23 @@ services:
       - 7003:9091
       - 51413:51413
       - 51413:51413/udp
-  tautulli:
-    image: lscr.io/linuxserver/tautulli:latest
-    container_name: tautulli
-    <<: *environment
-    <<: *policy
-    volumes:
-      - ${SERVER_DATA_DIR}/tautulli/config:/config
-    ports:
-      - 7004:8181
 
-  flexget:
-    image: wiserain/flexget
-    container_name: flexget
-    <<: *environment
-    <<: *policy
-    restart: on-failure:5
-    ports :
-      - 5050:5050
-    environment:
-      - FG_WEBUI_PASSWD=holiComoEstas
-      - TORRENT_PLUGIN=transmission
-    volumes:
-      - ${SERVER_STORAGE_DIR}/downloads:/data
-      # - ${SERVER_DATA_DIR}/flexget/config:/config
-      - ${REPO_CONFIG_DIR}/assets/flexget:/config
+  # flexget:
+  #   image: wiserain/flexget
+  #   container_name: flexget
+  #   <<: *environment
+  #   <<: *policy
+  #   <<: *network 
+  #   restart: on-failure:5
+  #   ports :
+  #     - 5050:5050
+  #   environment:
+  #     - FG_WEBUI_PASSWD=holiComoEstas
+  #     - TORRENT_PLUGIN=transmission
+  #   volumes:
+  #     - ${SERVER_STORAGE_DIR}/downloads:/data
+  #     # - ${SERVER_DATA_DIR}/flexget/config:/config
+  #     - ${REPO_CONFIG_DIR}/assets/flexget:/config
 
 
 # Utils
@@ -141,6 +171,7 @@ services:
     <<: *environment 
     <<: *policy
     <<: *security
+    <<: *network 
     ports:
       - 8001:80
     volumes:
@@ -148,40 +179,30 @@ services:
       - ${REPO_CONFIG_DIR}/assets/settings.json:/config/settings.json
       - ${REPO_CONFIG_DIR}/assets/filebrowser.db:/database/filebrowser.db
 
-  ubooquity:
-    image: lscr.io/linuxserver/ubooquity:latest
-    container_name: ubooquity
+  komga:
+    image: gotson/komga
+    container_name: komga
     <<: *environment
     <<: *policy
+    <<: *security
+    <<: *network
+
+
     volumes:
-      - ${SERVER_DATA_DIR}/ubooquity/config:/config
-      - ${SERVER_STORAGE_DIR}/books:/books
-      - ${SERVER_STORAGE_DIR}/comics:/comics
-      - ${SERVER_STORAGE_DIR}:/files
+      - ${SERVER_DATA_DIR}/komga/config:/config
+      - ${SERVER_STORAGE_DIR}:/data
+      # - /etc/timezone:/etc/timezone
+
     ports:
-      - 8002:2202
-      - 8003:2203
-
-  # calibre-web:
-  #   image:  ghcr.io/linuxserver/calibre-web
-  #   container_name: calibre-web
-  #   <<: *environment 
-  #   <<: *policy
-  #   environment:
-  #     - DOCKER_MODS=ghcr.io/linuxserver/mods:universal-calibre  #optional
-  #     - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
-  #   ports:
-  #     - 8004:8083
-
-  #   volumes:
-  #     - ${SERVER_DATA_DIR}/calibre-web/config:/config
-  #     - ${SERVER_STORAGE_DIR}/mybooks:/books
+      - 8002:8080
+    # user: "1000:1000"
 
   calibre:
     image:  lscr.io/linuxserver/calibre:latest
     container_name: calibre
     <<: *environment 
     <<: *policy
+    <<: *network 
     ports:
       - 8004:8080
       - 8008:8081
@@ -195,20 +216,21 @@ services:
     image: louislam/uptime-kuma:1
     <<: *environment 
     <<: *policy 
+    <<: *network 
     volumes:
       -  ${SERVER_DATA_DIR}/uptime-kuma/config:/app/data
     ports:
       - "8005:3001"
   
-  webtop:
-    image: lscr.io/linuxserver/webtop:latest
-    container_name: webtop
-    <<: *environment 
-    <<: *policy 
-    volumes:
-      - ${SERVER_DATA_DIR}/webtop/config:/config
-    ports:
-      - 8006:3000
+  # webtop:
+  #   image: lscr.io/linuxserver/webtop:latest
+  #   container_name: webtop
+  #   <<: *environment 
+  #   <<: *policy 
+  #   volumes:
+  #     - ${SERVER_DATA_DIR}/webtop/config:/config
+  #   ports:
+  #     - 8006:3000
 
   readarr:
     image: lscr.io/linuxserver/readarr:develop
@@ -216,13 +238,27 @@ services:
     <<: *environment 
     <<: *policy
     <<: *security
+    <<: *network 
     volumes:
       - ${SERVER_DATA_DIR}/readarr/config:/config
       - ${SERVER_STORAGE_DIR}/books:/books
       - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
     ports:
       - 8007:8787
-    restart: unless-stopped
+
+
+  firefox:
+    image: lscr.io/linuxserver/firefox:latest
+    container_name: firefox
+    <<: *environment 
+    <<: *policy 
+    <<: *network 
+    volumes:
+      - ${SERVER_DATA_DIR}/firefox/config:/config
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
+    shm_size: "1gb"
+    ports:
+      - 8009:3000
 
 # System
 
@@ -232,6 +268,7 @@ services:
     <<: *user 
     <<: *environment 
     <<: *policy 
+    <<: *network 
     ports:
       - 9001:80
 
@@ -240,30 +277,27 @@ services:
     container_name: librespeed
     <<: *environment 
     <<: *policy 
+    <<: *network 
     volumes:
       - ${SERVER_DATA_DIR}/librespeed/config:/config
     ports:
       - 9002:80
 
-  adguardhome:
-    image: adguard/adguardhome
-    container_name: adguardhome
-    <<: *environment 
-    <<: *policy 
-    ports:
-      - 53:53/tcp
-      - 53:53/udp
-      - 784:784/udp
-      - 853:853/tcp
-      - 3001:3000/tcp
-      - 81:80/tcp
-      - 443:443/tcp
-    volumes:
-      - ${SERVER_DATA_DIR}/adguardhome/work:/opt/adguardhome/work
-      - ${SERVER_DATA_DIR}/adguardhome/config:/opt/adguardhome/conf
+  # adguardhome:
+  #   image: adguard/adguardhome
+  #   container_name: adguardhome
+  #   <<: *environment 
+  #   <<: *policy 
+  #   <<: *network 
+  #   ports:
+  #     - 53:53/tcp
+  #     - 53:53/udp
+  #     - 784:784/udp
+  #     - 853:853/tcp
+  #     - 3001:3000/tcp
+  #     - 81:80/tcp
+  #     - 443:443/tcp
+  #   volumes:
+  #     - ${SERVER_DATA_DIR}/adguardhome/work:/opt/adguardhome/work
+  #     - ${SERVER_DATA_DIR}/adguardhome/config:/opt/adguardhome/conf
 
-  castblock:
-    network_mode: host
-    image: erdnaxeli/castblock
-    environment:
-      - CATEGORIES=sponsor,selfpromo

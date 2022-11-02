@@ -1,0 +1,71 @@
+- Streaming:
+
+    - radarr:
+        href: http://inverse.local:6002
+        container: radarr
+        server: http://inverse.local 
+        widget:
+          type: radarr
+          url: http://inverse.local:6002
+          key: f93184e22792464c9c364f291e09f29c
+    - sonarr:
+        href: http://inverse.local:6003
+        container: sonarr
+        server: http://inverse.local
+        widget:
+          type: sonarr
+          url: http://inverse.local:6003
+          key: a5d583908e6341c6b9015f1652b001c2
+
+    # - Bazarr:
+    #     href: http://localhost/
+
+- Downloads:
+    - prowlarr:
+        href: http://inverse.local:7001
+        container: prowlarr
+
+    - transmission:
+        href: http://inverse.local:7003
+        container: transmission
+
+
+
+- Utils:
+    - Files:
+        href: http://inverse.local:8001
+        container: filebrowser
+
+    - Komga:
+        href: http://inverse.local:8002
+        container: komga
+
+    - Calibre:
+        href: http://inverse.local:8004
+        container: calibre
+
+    - Kuma:
+        href: http://inverse.local:8005
+        container: kuma
+
+    - Firefox:
+        href: http://inverse.local:8009
+        container: firefox
+
+    # - Readarr:
+    #     href: http://localhost/
+
+
+- System:
+
+    - Whoami:
+        href: http://inverse.local:9001
+        container: whoami
+
+    - Librespeed:
+        href: http://inverse.local:9002
+        container: librespeed
+
+    # - Adguardhome:
+    #     href: http://localhost/
+

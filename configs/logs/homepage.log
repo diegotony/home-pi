@@ -1,0 +1,708 @@
+[2022-11-01T21:21:27.352Z] warn: Failed to update prerender cache for /en [Error: EACCES: permission denied, open '/app/.next/server/pages/en.html'] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'open',
+  path: '/app/.next/server/pages/en.html'
+}
+[2022-11-01T21:23:10.812Z] error: Failed to load services.yaml, please check for errors
+[2022-11-01T21:23:10.819Z] error: end of the stream or a document separator is expected (2:1)
+
+ 1 | - Streaming:
+ 2 | \
+-----^
+ 3 |     - Radarr:
+ 4 |         href: http://localhost/
+[2022-11-01T21:23:10.823Z] error: Failed to load services.yaml, please check for errors
+[2022-11-01T21:23:10.828Z] error: end of the stream or a document separator is expected (2:1)
+
+ 1 | - Streaming:
+ 2 | \
+-----^
+ 3 |     - Radarr:
+ 4 |         href: http://localhost/
+[2022-11-01T21:23:10.997Z] warn: Failed to update prerender cache for /en [Error: EACCES: permission denied, open '/app/.next/server/pages/en.html'] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'open',
+  path: '/app/.next/server/pages/en.html'
+}
+[2022-11-01T21:23:11.032Z] error: Failed to load services.yaml, please check for errors
+[2022-11-01T21:23:11.037Z] error: end of the stream or a document separator is expected (2:1)
+
+ 1 | - Streaming:
+ 2 | \
+-----^
+ 3 |     - Radarr:
+ 4 |         href: http://localhost/
+[2022-11-01T21:23:30.886Z] warn: Failed to update prerender cache for /en [Error: EACCES: permission denied, open '/app/.next/server/pages/en.html'] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'open',
+  path: '/app/.next/server/pages/en.html'
+}
+[2022-11-01T21:23:40.849Z] warn: Failed to update prerender cache for /en [Error: EACCES: permission denied, open '/app/.next/server/pages/en.html'] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'open',
+  path: '/app/.next/server/pages/en.html'
+}
+[2022-11-01T21:24:22.659Z] warn: Failed to update prerender cache for /en [Error: EACCES: permission denied, open '/app/.next/server/pages/en.html'] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'open',
+  path: '/app/.next/server/pages/en.html'
+}
+[2022-11-01T21:24:53.538Z] warn: Failed to update prerender cache for /en [Error: EACCES: permission denied, open '/app/.next/server/pages/en.html'] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'open',
+  path: '/app/.next/server/pages/en.html'
+}
+[2022-11-01T21:25:34.900Z] warn: Failed to update prerender cache for /en [Error: EACCES: permission denied, open '/app/.next/server/pages/en.html'] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'open',
+  path: '/app/.next/server/pages/en.html'
+}
+[2022-11-01T21:26:34.679Z] warn: Failed to update prerender cache for /en [Error: EACCES: permission denied, open '/app/.next/server/pages/en.html'] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'open',
+  path: '/app/.next/server/pages/en.html'
+}
+[2022-11-01T21:32:38.109Z] warn: Failed to update prerender cache for /en [Error: EACCES: permission denied, open '/app/.next/server/pages/en.html'] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'open',
+  path: '/app/.next/server/pages/en.html'
+}
+[2022-11-02T00:49:21.384Z] warn: Failed to update prerender cache for /en [Error: EACCES: permission denied, open '/app/.next/server/pages/en.html'] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'open',
+  path: '/app/.next/server/pages/en.html'
+}
+[2022-11-02T00:49:22.669Z] error: <httpProxy> Error calling http://inverse.local/api/v3/wanted/missing...
+[2022-11-02T00:49:22.675Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:49:22.690Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue...
+[2022-11-02T00:49:22.691Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:49:22.780Z] error: <httpProxy> Error calling http://inverse.local/api/v3/series...
+[2022-11-02T00:49:22.783Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:49:37.826Z] error: <httpProxy> Error calling http://inverse.local/api/v3/wanted/missing...
+[2022-11-02T00:49:37.834Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:49:37.837Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue...
+[2022-11-02T00:49:37.853Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:49:37.930Z] error: <httpProxy> Error calling http://inverse.local/api/v3/series...
+[2022-11-02T00:49:37.932Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:49:38.063Z] warn: Failed to update prerender cache for /en [Error: EACCES: permission denied, open '/app/.next/server/pages/en.html'] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'open',
+  path: '/app/.next/server/pages/en.html'
+}
+[2022-11-02T00:49:38.407Z] error: <httpProxy> Error calling http://inverse.local/api/v3/wanted/missing...
+[2022-11-02T00:49:38.411Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:49:38.414Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue...
+[2022-11-02T00:49:38.416Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:49:38.501Z] error: <httpProxy> Error calling http://inverse.local/api/v3/series...
+[2022-11-02T00:49:38.503Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:49:41.127Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue...
+[2022-11-02T00:49:41.129Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:49:41.132Z] error: <httpProxy> Error calling http://inverse.local/api/v3/wanted/missing...
+[2022-11-02T00:49:41.136Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:49:41.226Z] error: <httpProxy> Error calling http://inverse.local/api/v3/series...
+[2022-11-02T00:49:41.228Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:49:51.221Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue...
+[2022-11-02T00:49:51.223Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:49:51.226Z] error: <httpProxy> Error calling http://inverse.local/api/v3/wanted/missing...
+[2022-11-02T00:49:51.229Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:49:51.332Z] error: <httpProxy> Error calling http://inverse.local/api/v3/series...
+[2022-11-02T00:49:51.334Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:49:52.264Z] error: <httpProxy> Error calling http://inverse.local/api/v3/wanted/missing...
+[2022-11-02T00:49:52.266Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:49:52.287Z] error: <httpProxy> Error calling http://inverse.local/api/v3/series...
+[2022-11-02T00:49:52.288Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:49:52.379Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue...
+[2022-11-02T00:49:52.381Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:50:25.524Z] error: <httpProxy> Error calling http://inverse.local/api/v3/wanted/missing...
+[2022-11-02T00:50:25.528Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:50:25.530Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue...
+[2022-11-02T00:50:25.532Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:50:25.640Z] error: <httpProxy> Error calling http://inverse.local/api/v3/series...
+[2022-11-02T00:50:25.641Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:50:50.045Z] error: <httpProxy> Error calling http://inverse.local/api/v3/wanted/missing...
+[2022-11-02T00:50:50.047Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:50:50.050Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue...
+[2022-11-02T00:50:50.051Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:50:50.112Z] warn: Failed to update prerender cache for /en [Error: EACCES: permission denied, open '/app/.next/server/pages/en.html'] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'open',
+  path: '/app/.next/server/pages/en.html'
+}
+[2022-11-02T00:50:50.126Z] error: <httpProxy> Error calling http://inverse.local/api/v3/series...
+[2022-11-02T00:50:50.128Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:50:50.402Z] error: <httpProxy> Error calling http://inverse.local/api/v3/movie...
+[2022-11-02T00:50:50.406Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:50:50.411Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue/status...
+[2022-11-02T00:50:50.413Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:50:50.525Z] error: <httpProxy> Error calling http://inverse.local/api/v3/wanted/missing...
+[2022-11-02T00:50:50.528Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:50:50.530Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue...
+[2022-11-02T00:50:50.532Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:50:50.627Z] error: <httpProxy> Error calling http://inverse.local/api/v3/series...
+[2022-11-02T00:50:50.629Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:51:25.844Z] warn: Failed to update prerender cache for /en [Error: EACCES: permission denied, open '/app/.next/server/pages/en.html'] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'open',
+  path: '/app/.next/server/pages/en.html'
+}
+[2022-11-02T00:51:27.087Z] error: <httpProxy> Error calling http://inverse.local/api/v3/movie...
+[2022-11-02T00:51:27.090Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:51:27.096Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue/status...
+[2022-11-02T00:51:27.097Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:51:27.215Z] error: <httpProxy> Error calling http://inverse.local/api/v3/wanted/missing...
+[2022-11-02T00:51:27.217Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:51:27.219Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue...
+[2022-11-02T00:51:27.221Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:51:27.330Z] error: <httpProxy> Error calling http://inverse.local/api/v3/series...
+[2022-11-02T00:51:27.334Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:51:47.273Z] error: <httpProxy> Error calling http://inverse.local/api/v3/movie...
+[2022-11-02T00:51:47.278Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:51:47.283Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue/status...
+[2022-11-02T00:51:47.285Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:51:47.387Z] error: <httpProxy> Error calling http://inverse.local/api/v3/wanted/missing...
+[2022-11-02T00:51:47.389Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:51:47.407Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue...
+[2022-11-02T00:51:47.409Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:51:47.512Z] error: <httpProxy> Error calling http://inverse.local/api/v3/series...
+[2022-11-02T00:51:47.514Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:51:47.555Z] warn: Failed to update prerender cache for /en [Error: EACCES: permission denied, open '/app/.next/server/pages/en.html'] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'open',
+  path: '/app/.next/server/pages/en.html'
+}
+[2022-11-02T00:51:47.868Z] error: <httpProxy> Error calling http://inverse.local/api/v3/movie...
+[2022-11-02T00:51:47.870Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:51:47.873Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue/status...
+[2022-11-02T00:51:47.874Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:51:47.986Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue...
+[2022-11-02T00:51:47.987Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:51:47.989Z] error: <httpProxy> Error calling http://inverse.local/api/v3/wanted/missing...
+[2022-11-02T00:51:47.990Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:51:48.098Z] error: <httpProxy> Error calling http://inverse.local/api/v3/series...
+[2022-11-02T00:51:48.099Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:52:43.914Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue/status...
+[2022-11-02T00:52:43.918Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:52:43.920Z] error: <httpProxy> Error calling http://inverse.local/api/v3/movie...
+[2022-11-02T00:52:43.922Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:52:44.033Z] error: <httpProxy> Error calling http://inverse.local/api/v3/wanted/missing...
+[2022-11-02T00:52:44.034Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:52:44.037Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue...
+[2022-11-02T00:52:44.038Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:52:44.171Z] error: <httpProxy> Error calling http://inverse.local/api/v3/series...
+[2022-11-02T00:52:44.172Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:52:44.197Z] warn: Failed to update prerender cache for /en [Error: EACCES: permission denied, open '/app/.next/server/pages/en.html'] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'open',
+  path: '/app/.next/server/pages/en.html'
+}
+[2022-11-02T00:52:44.491Z] error: <httpProxy> Error calling http://inverse.local/api/v3/movie...
+[2022-11-02T00:52:44.494Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:52:44.500Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue/status...
+[2022-11-02T00:52:44.504Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:52:44.622Z] error: <httpProxy> Error calling http://inverse.local/api/v3/wanted/missing...
+[2022-11-02T00:52:44.624Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:52:44.626Z] error: <httpProxy> Error calling http://inverse.local/api/v3/queue...
+[2022-11-02T00:52:44.627Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
+[2022-11-02T00:52:44.729Z] error: <httpProxy> Error calling http://inverse.local/api/v3/series...
+[2022-11-02T00:52:44.730Z] error: <httpProxy> [
+  500,
+  Error: getaddrinfo ENOTFOUND inverse.local
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'inverse.local'
+  }
+]
