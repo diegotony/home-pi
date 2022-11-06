@@ -54,21 +54,21 @@ services:
     volumes:
       - ${REPO_CONFIG_DIR}/configs:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
-
+      - ${REPO_CONFIG_DIR}/images:/app/public/images
 # Streaming
 
-  # bazarr:
-  #   image: lscr.io/linuxserver/bazarr:latest
-  #   container_name: bazarr
-  #   <<: *environment
-  #   <<: *policy
-  #   <<: *network 
-  #   volumes:
-  #     - ${SERVER_DATA_DIR}/bazarr/config:/config
-  #     - ${SERVER_STORAGE_DIR}/movies:/movies #optional
-  #     - ${SERVER_STORAGE_DIR}/tv:/tv #optional
-  #   ports:
-  #     - 6001:6767
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    <<: *environment
+    <<: *policy
+    <<: *network 
+    volumes:
+      - ${SERVER_DATA_DIR}/bazarr/config:/config
+      - ${SERVER_STORAGE_DIR}/movies:/movies #optional
+      - ${SERVER_STORAGE_DIR}/tv:/tv #optional
+    ports:
+      - 6001:6767
 
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -111,6 +111,7 @@ services:
       - ${SERVER_DATA_DIR}/jellyfin/cache:/cache
       - ${SERVER_STORAGE_DIR}:/media #optional
       - ${SERVER_DATA_DIR}/jellyfin/media2:/media2:ro
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
 
 # Indexers
 
@@ -144,6 +145,39 @@ services:
       - 7003:9091
       - 51413:51413
       - 51413:51413/udp
+
+  jdownloader:
+    image: jaymoulin/jdownloader
+    container_name:  jdownloader
+    <<: *user 
+    restart: unless-stopped
+    ports:
+      - 3129:3129 
+    volumes:
+      - ${SERVER_DATA_DIR}/jdownloader/config:/opt/JDownloader/app/cfg
+      - ${SERVER_STORAGE_DIR}/downloads/jdownloader:/opt/JDownloader/Downloads
+    environment: 
+            MYJD_USER: geekland@geekland.com
+            MYJD_PASSWORD: geekland
+            MYJD_DEVICE_NAME: geekland_download
+            XDG_DOWNLOAD_DIR: /opt/JDownloader/Downloads
+
+  # jdownloader:
+  #   image: jaymoulin/jdownloader
+  #   container_name: jdownloader
+  #   restart: always
+  #   user: 1000:1000
+  #   volumes:
+  #     - ${SERVER_DATA_DIR}/jdownloader/config:/opt/JDownloader/app/cfg
+  #     - ${SERVER_STORAGE_DIR}/downloads:/opt/JDownloader/Downloads
+  #   environment: 
+  #     MYJD_USER: email@email.com #optional (see [Identify](https://github.com/jaymoulin/docker-jdownloader#identify))
+  #     MYJD_PASSWORD: bar #optional (see [Identify](https://github.com/jaymoulin/docker-jdownloader#identify))
+  #     MYJD_DEVICE_NAME: goofy #optional
+  #     XDG_DOWNLOAD_DIR: /opt/JDownloader/Downloads #optional
+  #   ports:
+  #     - 3129:3129 
+
 
   # flexget:
   #   image: wiserain/flexget

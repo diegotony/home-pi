@@ -3,17 +3,26 @@
 # https://github.com/benphelps/homepage/wiki/Settings
 title: inverse.local
 background: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=80
-backgroundOpacity: 0.5
-favicon: app/config/logo.png
+backgroundOpacity: 0.2
+favicon: /app/public/images/logo.png
 theme: dark 
-headerStyle: boxed
 base: http://inverse.local
 language: en
 target: _blank
 layout:
-  Media:
+  Streaming:
     style: row
-    columns: 3
+    columns: 4
+  Downloads:
+    style: row
+    columns: 2
+  Utils:
+    style: row
+    columns: 4
+  System:
+    style: row
+    columns: 5
+
 providers:
   openweathermap: openweathermapapikey
   weatherapi: weatherapiapikey

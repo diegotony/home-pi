@@ -6,7 +6,9 @@
     - Github:
         - abbr: GH
           href: https://github.com/diegotony
-
+    - Gitlab:
+        - abbr: GL
+          href: https://gitlab.com/diegotony
 - Social:
     - Reddit:
         - abbr: RE

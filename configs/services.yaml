@@ -1,5 +1,3 @@
-
-
 - Streaming:
     - radarr:
         href: http://inverse.local:6002
@@ -30,12 +28,27 @@
             url: http://inverse.local:8096
             key: d195e389d696446e80cea6f6791df84a
 
+    - Bazarr:
+        href: http://inverse.local:6001
+        container: bazarr
+        server: my-docker
+        widget:
+            type: bazarr
+            url: http://inverse.local:6001
+            key: 8b2245311b106dc14859d2df4be7d78f
 
+- System:
 
-    # - Bazarr:
-    #     href: http://localhost/
+    - Whoami:
+        href: http://inverse.local:9001
+        container: whoami
+        server: my-docker
 
-- Downloads:
+    - Librespeed:
+        href: http://inverse.local:9002
+        container: librespeed
+        server: my-docker
+
     - prowlarr:
         server: my-docker
         href: http://inverse.local:7001
@@ -45,6 +58,17 @@
         server: my-docker
         href: http://inverse.local:7003
         container: transmission
+
+    - Firefox:
+        href: http://inverse.local:8009
+        container: firefox
+        server: my-docker
+
+    # - jdownloader:
+    #     server: my-docker
+    #     href: http://inverse.local:3129
+    #     container: jdownloader-2
+
 
 - Utils:
     - Files:
@@ -66,28 +90,4 @@
         href: http://inverse.local:8005
         container: kuma
         server: my-docker
-
-    - Firefox:
-        href: http://inverse.local:8009
-        container: firefox
-        server: my-docker
-
-    # - Readarr:
-    #     href: http://localhost/
-
-
-- System:
-
-    - Whoami:
-        href: http://inverse.local:9001
-        container: whoami
-        server: my-docker
-
-    - Librespeed:
-        href: http://inverse.local:9002
-        container: librespeed
-        server: my-docker
-
-    # - Adguardhome:
-    #     href: http://localhost/
 
