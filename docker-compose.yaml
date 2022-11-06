@@ -40,10 +40,11 @@ services:
   #   volumes:
   #     - ${REPO_CONFIG_DIR}/assets:/www/assets
 
+
   local:
     image: ghcr.io/benphelps/homepage:latest
     container_name: local
-    <<: *user 
+    # <<: *user 
     <<: *environment 
     <<: *policy 
     <<: *network 
@@ -53,7 +54,6 @@ services:
     volumes:
       - ${REPO_CONFIG_DIR}/configs:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
-
 
 # Streaming
 
@@ -177,7 +177,7 @@ services:
     volumes:
       - ${SERVER_STORAGE_DIR}:/srv
       - ${REPO_CONFIG_DIR}/assets/settings.json:/config/settings.json
-      - ${REPO_CONFIG_DIR}/assets/filebrowser.db:/database/filebrowser.db
+      # - ${REPO_CONFIG_DIR}/assets/filebrowser.db:/database/filebrowser.db
 
   komga:
     image: gotson/komga
