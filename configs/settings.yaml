@@ -21,7 +21,7 @@ layout:
     columns: 4
   System:
     style: row
-    columns: 5
+    columns: 3
 
 providers:
   openweathermap: openweathermapapikey

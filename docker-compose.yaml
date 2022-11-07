@@ -146,37 +146,30 @@ services:
       - 51413:51413
       - 51413:51413/udp
 
-  jdownloader:
-    image: jaymoulin/jdownloader
-    container_name:  jdownloader
-    <<: *user 
-    restart: unless-stopped
-    ports:
-      - 3129:3129 
-    volumes:
-      - ${SERVER_DATA_DIR}/jdownloader/config:/opt/JDownloader/app/cfg
-      - ${SERVER_STORAGE_DIR}/downloads/jdownloader:/opt/JDownloader/Downloads
-    environment: 
-            MYJD_USER: geekland@geekland.com
-            MYJD_PASSWORD: geekland
-            MYJD_DEVICE_NAME: geekland_download
-            XDG_DOWNLOAD_DIR: /opt/JDownloader/Downloads
-
   # jdownloader:
   #   image: jaymoulin/jdownloader
-  #   container_name: jdownloader
-  #   restart: always
-  #   user: 1000:1000
-  #   volumes:
-  #     - ${SERVER_DATA_DIR}/jdownloader/config:/opt/JDownloader/app/cfg
-  #     - ${SERVER_STORAGE_DIR}/downloads:/opt/JDownloader/Downloads
-  #   environment: 
-  #     MYJD_USER: email@email.com #optional (see [Identify](https://github.com/jaymoulin/docker-jdownloader#identify))
-  #     MYJD_PASSWORD: bar #optional (see [Identify](https://github.com/jaymoulin/docker-jdownloader#identify))
-  #     MYJD_DEVICE_NAME: goofy #optional
-  #     XDG_DOWNLOAD_DIR: /opt/JDownloader/Downloads #optional
+  #   container_name:  jdownloader
+  #   <<: *user 
+  #   restart: unless-stopped
   #   ports:
   #     - 3129:3129 
+  #   volumes:
+  #     - ${SERVER_DATA_DIR}/jdownloader/config:/opt/JDownloader/app/cfg
+  #     - ${SERVER_STORAGE_DIR}/downloads/jdownloader:/opt/JDownloader/Downloads
+  #   environment: 
+  #           MYJD_USER: geekland@geekland.com
+  #           MYJD_PASSWORD: geekland
+  #           MYJD_DEVICE_NAME: geekland_download
+  #           XDG_DOWNLOAD_DIR: /opt/JDownloader/Downloads
+
+  metube:
+    image: alexta69/metube
+    container_name: metube
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    volumes:
+      - ${SERVER_STORAGE_DIR}/downloads/youtube:/downloads
 
 
   # flexget:
@@ -244,6 +237,8 @@ services:
     volumes:
       - ${SERVER_DATA_DIR}/calibre/config:/config
       - ${SERVER_STORAGE_DIR}/mybooks:/books
+      - ${SERVER_STORAGE_DIR}/manga:/manga
+      - ${SERVER_STORAGE_DIR}/comics:/comics
 
   kuma:
     container_name: kuma
@@ -290,7 +285,7 @@ services:
     volumes:
       - ${SERVER_DATA_DIR}/firefox/config:/config
       - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
-    shm_size: "1gb"
+    shm_size: "2gb"
     ports:
       - 8009:3000
 

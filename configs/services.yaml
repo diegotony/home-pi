@@ -59,6 +59,11 @@
         href: http://inverse.local:7003
         container: transmission
 
+    - metube:
+        server: my-docker
+        href: http://inverse.local:8081
+        container: metube
+
     - Firefox:
         href: http://inverse.local:8009
         container: firefox
