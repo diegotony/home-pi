@@ -333,30 +333,30 @@ services:
     environment:
       - COMPOSE_DIR=/compose
 
-  swag:
-    image: lscr.io/linuxserver/swag
-    container_name: swag
-    cap_add:
-      - NET_ADMIN
-    <<: *environment
-    <<: *network 
-    <<: *policy 
-    # environment:
-      # - URL=yourdomain.url
-      # - SUBDOMAINS=www,
-      # - VALIDATION=http
-      # - CERTPROVIDER= #optional
-      # - DNSPLUGIN=cloudflare #optional
-      # - DUCKDNSTOKEN=<token> #optional
-      # - EMAIL=<e-mail> #optional
-      # - ONLY_SUBDOMAINS=false #optional
-      # - EXTRA_DOMAINS=<extradomains> #optional
-      # - STAGING=false #optional
-    volumes:
-      - ${SERVER_DATA_DIR}/swag/config:/config
-    ports:
-      - 443:443
-      - 9005:80 #optional
+  # swag:
+  #   image: lscr.io/linuxserver/swag
+  #   container_name: swag
+  #   cap_add:
+  #     - NET_ADMIN
+  #   <<: *environment
+  #   <<: *network 
+  #   <<: *policy 
+  #   # environment:
+  #     # - URL=yourdomain.url
+  #     # - SUBDOMAINS=www,
+  #     # - VALIDATION=http
+  #     # - CERTPROVIDER= #optional
+  #     # - DNSPLUGIN=cloudflare #optional
+  #     # - DUCKDNSTOKEN=<token> #optional
+  #     # - EMAIL=<e-mail> #optional
+  #     # - ONLY_SUBDOMAINS=false #optional
+  #     # - EXTRA_DOMAINS=<extradomains> #optional
+  #     # - STAGING=false #optional
+  #   volumes:
+  #     - ${SERVER_DATA_DIR}/swag/config:/config
+  #   ports:
+  #     - 443:443
+  #     - 9005:80 #optional
 
 # secrets:
 #   secret_file:
