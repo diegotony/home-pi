@@ -9,8 +9,10 @@ x-environment: &environment
     - PUID=1000
     - PGID=1000
     - TZ=America/Guayaquil
+    # - FILE__SECRET=/run/secrets/secret_file
     # - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
     # - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
+
 
 x-policy: &policy
     restart: unless-stopped
@@ -63,10 +65,13 @@ services:
     <<: *environment
     <<: *policy
     <<: *network 
+    secrets:
+      - secret_file
     volumes:
       - ${SERVER_DATA_DIR}/bazarr/config:/config
       - ${SERVER_STORAGE_DIR}/movies:/movies #optional
       - ${SERVER_STORAGE_DIR}/tv:/tv #optional
+    
     ports:
       - 6001:6767
 
@@ -112,6 +117,7 @@ services:
       - ${SERVER_STORAGE_DIR}:/media #optional
       - ${SERVER_DATA_DIR}/jellyfin/media2:/media2:ro
       - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
+      - ${REPO_CONFIG_DIR}/configs:/run/secrets #optional
 
 # Indexers
 
@@ -214,7 +220,6 @@ services:
     <<: *security
     <<: *network
 
-
     volumes:
       - ${SERVER_DATA_DIR}/komga/config:/config
       - ${SERVER_STORAGE_DIR}:/data
@@ -233,7 +238,8 @@ services:
     ports:
       - 8004:8080
       - 8008:8081
-
+    # secrets:
+    #   - secret_file
     volumes:
       - ${SERVER_DATA_DIR}/calibre/config:/config
       - ${SERVER_STORAGE_DIR}/mybooks:/books
@@ -351,3 +357,7 @@ services:
     ports:
       - 443:443
       - 9005:80 #optional
+
+# secrets:
+#   secret_file:
+#     file: configs/secrets.txt
