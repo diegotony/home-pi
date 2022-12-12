@@ -14,11 +14,11 @@
 #     expanded: true
 #     disk: /mnt/f3a032ea-67e9-4a6c-b858-b17c8882d45a
 
-
 - search:
     provider: google
     target: _blank
     focus: true
+
 - datetime:
     text_size:  4xl
     format:

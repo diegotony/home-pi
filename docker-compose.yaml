@@ -29,6 +29,7 @@ networks:
     driver: bridge
 
 services:
+
   # local:
   #   image: b4bz/homer
   #   container_name: local
@@ -41,7 +42,6 @@ services:
   #     - 80:8080
   #   volumes:
   #     - ${REPO_CONFIG_DIR}/assets:/www/assets
-
 
   local:
     image: ghcr.io/benphelps/homepage:latest
@@ -57,8 +57,8 @@ services:
       - ${REPO_CONFIG_DIR}/configs:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
       - ${REPO_CONFIG_DIR}/images:/app/public/images
-# Streaming
 
+# Streaming
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
@@ -152,22 +152,6 @@ services:
       - 51413:51413
       - 51413:51413/udp
 
-  # jdownloader:
-  #   image: jaymoulin/jdownloader
-  #   container_name:  jdownloader
-  #   <<: *user 
-  #   restart: unless-stopped
-  #   ports:
-  #     - 3129:3129 
-  #   volumes:
-  #     - ${SERVER_DATA_DIR}/jdownloader/config:/opt/JDownloader/app/cfg
-  #     - ${SERVER_STORAGE_DIR}/downloads/jdownloader:/opt/JDownloader/Downloads
-  #   environment: 
-  #           MYJD_USER: geekland@geekland.com
-  #           MYJD_PASSWORD: geekland
-  #           MYJD_DEVICE_NAME: geekland_download
-  #           XDG_DOWNLOAD_DIR: /opt/JDownloader/Downloads
-
   metube:
     image: alexta69/metube
     container_name: metube
@@ -176,24 +160,6 @@ services:
       - "8081:8081"
     volumes:
       - ${SERVER_STORAGE_DIR}/downloads/youtube:/downloads
-
-
-  # flexget:
-  #   image: wiserain/flexget
-  #   container_name: flexget
-  #   <<: *environment
-  #   <<: *policy
-  #   <<: *network 
-  #   restart: on-failure:5
-  #   ports :
-  #     - 5050:5050
-  #   environment:
-  #     - FG_WEBUI_PASSWD=holiComoEstas
-  #     - TORRENT_PLUGIN=transmission
-  #   volumes:
-  #     - ${SERVER_STORAGE_DIR}/downloads:/data
-  #     # - ${SERVER_DATA_DIR}/flexget/config:/config
-  #     - ${REPO_CONFIG_DIR}/assets/flexget:/config
 
 
 # Utils
@@ -256,31 +222,20 @@ services:
       -  ${SERVER_DATA_DIR}/uptime-kuma/config:/app/data
     ports:
       - "8005:3001"
-  
-  # webtop:
-  #   image: lscr.io/linuxserver/webtop:latest
-  #   container_name: webtop
+
+  # readarr:
+  #   image: lscr.io/linuxserver/readarr:develop
+  #   container_name: readarr
   #   <<: *environment 
-  #   <<: *policy 
+  #   <<: *policy
+  #   <<: *security
+  #   <<: *network 
   #   volumes:
-  #     - ${SERVER_DATA_DIR}/webtop/config:/config
+  #     - ${SERVER_DATA_DIR}/readarr/config:/config
+  #     - ${SERVER_STORAGE_DIR}/books:/books
+  #     - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
   #   ports:
-  #     - 8006:3000
-
-  readarr:
-    image: lscr.io/linuxserver/readarr:develop
-    container_name: readarr
-    <<: *environment 
-    <<: *policy
-    <<: *security
-    <<: *network 
-    volumes:
-      - ${SERVER_DATA_DIR}/readarr/config:/config
-      - ${SERVER_STORAGE_DIR}/books:/books
-      - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
-    ports:
-      - 8007:8787
-
+  #     - 8007:8787
 
   firefox:
     image: lscr.io/linuxserver/firefox:latest
@@ -294,6 +249,19 @@ services:
     shm_size: "2gb"
     ports:
       - 8009:3000
+
+  changedetection:
+    image: lscr.io/linuxserver/changedetection.io:latest
+    container_name: changedetection
+    <<: *environment 
+    <<: *policy 
+    <<: *network 
+    volumes:
+      - ${SERVER_DATA_DIR}/changedetection/config:/config
+    ports:
+      - 8010:5000
+
+
 
 # System
 
@@ -326,37 +294,9 @@ services:
     volumes:
       - ${SERVER_DATA_DIR}/yacht/config:/config
       - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
-      - ${REPO_CONFIG_DIR}:/compose
     <<: *environment
     <<: *network 
     <<: *policy 
-    environment:
-      - COMPOSE_DIR=/compose
-
-  # swag:
-  #   image: lscr.io/linuxserver/swag
-  #   container_name: swag
-  #   cap_add:
-  #     - NET_ADMIN
-  #   <<: *environment
-  #   <<: *network 
-  #   <<: *policy 
-  #   # environment:
-  #     # - URL=yourdomain.url
-  #     # - SUBDOMAINS=www,
-  #     # - VALIDATION=http
-  #     # - CERTPROVIDER= #optional
-  #     # - DNSPLUGIN=cloudflare #optional
-  #     # - DUCKDNSTOKEN=<token> #optional
-  #     # - EMAIL=<e-mail> #optional
-  #     # - ONLY_SUBDOMAINS=false #optional
-  #     # - EXTRA_DOMAINS=<extradomains> #optional
-  #     # - STAGING=false #optional
-  #   volumes:
-  #     - ${SERVER_DATA_DIR}/swag/config:/config
-  #   ports:
-  #     - 443:443
-  #     - 9005:80 #optional
 
 # secrets:
 #   secret_file:

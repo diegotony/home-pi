@@ -81,6 +81,10 @@
         container: yacht
         server: my-docker
 
+    - ChangeDetection:
+        href: http://inverse.local:8010
+        container: changedetection
+        server: my-docker
 
 - Utils:
     - Firefox:
