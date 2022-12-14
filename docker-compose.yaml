@@ -57,6 +57,13 @@ services:
       - ${REPO_CONFIG_DIR}/configs:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
       - ${REPO_CONFIG_DIR}/images:/app/public/images
+    labels:
+      - homepage.group=Admin
+      - homepage.name=Dashboard
+      - homepage.container=local
+      - homepage.server=my-docker
+      - homepage.description=Me Dashboard
+      - homepage.href=http://inverse.local
 
 # Streaming
   bazarr:
@@ -70,10 +77,16 @@ services:
     volumes:
       - ${SERVER_DATA_DIR}/bazarr/config:/config
       - ${SERVER_STORAGE_DIR}/movies:/movies #optional
-      - ${SERVER_STORAGE_DIR}/tv:/tv #optional
-    
+      - ${SERVER_STORAGE_DIR}/tv:/tv #optional   
     ports:
       - 6001:6767
+    labels:
+      - homepage.group=Media Management
+      - homepage.name=Bazarr
+      - homepage.container=bazarr
+      - homepage.server=my-docker
+      - homepage.description=Download Subtitles
+      - homepage.href=http://inverse.local:6001
 
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -88,6 +101,13 @@ services:
       - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
     ports:
       - 6002:7878
+    labels:
+      - homepage.group=Media Management
+      - homepage.name=Radarr
+      - homepage.container=radarr
+      - homepage.server=my-docker
+      - homepage.description=Download Movies
+      - homepage.href=http://inverse.local:6002
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -95,13 +115,19 @@ services:
     <<: *environment
     <<: *policy
     <<: *network 
-
     volumes:
       - ${SERVER_DATA_DIR}/sonarr/config:/config
       - ${SERVER_STORAGE_DIR}/tv:/tv #optional
       - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
     ports:
       - 6003:8989
+    labels:
+      - homepage.group=Media Management
+      - homepage.name=Sonarr
+      - homepage.container=sonarr
+      - homepage.server=my-docker
+      - homepage.description=Download Series
+      - homepage.href=http://inverse.local:6003
 
   jellyfin:
     image: jellyfin/jellyfin
@@ -119,6 +145,14 @@ services:
       - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
       - ${REPO_CONFIG_DIR}/configs:/run/secrets #optional
 
+    labels:
+      - homepage.group=Streaming
+      - homepage.name=Jellyfin
+      - homepage.container=jellyfin
+      - homepage.server=my-docker
+      - homepage.description=Watch Media
+      - homepage.href=http://inverse.local:8096
+
 # Indexers
 
   prowlarr:
@@ -135,6 +169,14 @@ services:
     ports:
       - 7001:9696
     restart: unless-stopped
+    labels:
+      - homepage.group=Media Management
+      - homepage.name=Prowlarr
+      - homepage.container=prowlarr
+      - homepage.server=my-docker
+      - homepage.description=Indexers for Media
+      - homepage.href=http://inverse.local:7001
+
 
   transmission:
     image: lscr.io/linuxserver/transmission:latest
@@ -151,7 +193,14 @@ services:
       - 7003:9091
       - 51413:51413
       - 51413:51413/udp
-
+    labels:
+      - homepage.group=Media Management
+      - homepage.name=Transmission
+      - homepage.container=transmission
+      - homepage.server=my-docker
+      - homepage.description=Download Torrents
+      - homepage.href=http://inverse.local:7003
+  
   metube:
     image: alexta69/metube
     container_name: metube
@@ -160,7 +209,13 @@ services:
       - "8081:8081"
     volumes:
       - ${SERVER_STORAGE_DIR}/downloads/youtube:/downloads
-
+    labels:
+      - homepage.group=Utils
+      - homepage.name=Metube
+      - homepage.container=metube
+      - homepage.server=my-docker
+      - homepage.description=Download Youtube
+      - homepage.href=http://inverse.local:8081
 
 # Utils
 
@@ -177,6 +232,13 @@ services:
       - ${SERVER_STORAGE_DIR}:/srv
       - ${REPO_CONFIG_DIR}/assets/settings.json:/config/settings.json
       # - ${REPO_CONFIG_DIR}/assets/filebrowser.db:/database/filebrowser.db
+    labels:
+      - homepage.group=Utils
+      - homepage.name=Filebrowser
+      - homepage.container=filebrowser
+      - homepage.server=my-docker
+      - homepage.description=Explorer
+      - homepage.href=http://inverse.local:8001
 
   komga:
     image: gotson/komga
@@ -185,15 +247,20 @@ services:
     <<: *policy
     <<: *security
     <<: *network
-
     volumes:
       - ${SERVER_DATA_DIR}/komga/config:/config
       - ${SERVER_STORAGE_DIR}:/data
       # - /etc/timezone:/etc/timezone
-
     ports:
       - 8002:8080
     # user: "1000:1000"
+    labels:
+      - homepage.group=Streaming
+      - homepage.name=Komga
+      - homepage.container=komga
+      - homepage.server=my-docker
+      - homepage.description=Read Ebooks
+      - homepage.href=http://inverse.local:8002
 
   calibre:
     image:  lscr.io/linuxserver/calibre:latest
@@ -204,13 +271,18 @@ services:
     ports:
       - 8004:8080
       - 8008:8081
-    # secrets:
-    #   - secret_file
     volumes:
       - ${SERVER_DATA_DIR}/calibre/config:/config
       - ${SERVER_STORAGE_DIR}/mybooks:/books
       - ${SERVER_STORAGE_DIR}/manga:/manga
       - ${SERVER_STORAGE_DIR}/comics:/comics
+    labels:
+      - homepage.group=Utils
+      - homepage.name=Calibre
+      - homepage.container=calibre
+      - homepage.server=my-docker
+      - homepage.description=Management Books
+      - homepage.href=http://inverse.local:8004
 
   kuma:
     container_name: kuma
@@ -222,20 +294,13 @@ services:
       -  ${SERVER_DATA_DIR}/uptime-kuma/config:/app/data
     ports:
       - "8005:3001"
-
-  # readarr:
-  #   image: lscr.io/linuxserver/readarr:develop
-  #   container_name: readarr
-  #   <<: *environment 
-  #   <<: *policy
-  #   <<: *security
-  #   <<: *network 
-  #   volumes:
-  #     - ${SERVER_DATA_DIR}/readarr/config:/config
-  #     - ${SERVER_STORAGE_DIR}/books:/books
-  #     - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
-  #   ports:
-  #     - 8007:8787
+    labels:
+      - homepage.group=Utils
+      - homepage.name=Kuma
+      - homepage.container=kuma
+      - homepage.server=my-docker
+      - homepage.description=Check Status in Web Pages
+      - homepage.href=http://inverse.local:8005
 
   firefox:
     image: lscr.io/linuxserver/firefox:latest
@@ -249,6 +314,13 @@ services:
     shm_size: "2gb"
     ports:
       - 8009:3000
+    labels:
+      - homepage.group=Utils
+      - homepage.name=Browser
+      - homepage.container=firefox
+      - homepage.server=my-docker
+      - homepage.description=Provisional Browser
+      - homepage.href=http://inverse.local:8009
 
   changedetection:
     image: lscr.io/linuxserver/changedetection.io:latest
@@ -260,9 +332,13 @@ services:
       - ${SERVER_DATA_DIR}/changedetection/config:/config
     ports:
       - 8010:5000
-
-
-
+    labels:
+      - homepage.group=Utils
+      - homepage.name=ChangeDetection
+      - homepage.container=changedetection
+      - homepage.server=my-docker
+      - homepage.description=Check Changes in Websites
+      - homepage.href=http://inverse.local:8010
 # System
 
   whoami:
@@ -274,17 +350,13 @@ services:
     <<: *network 
     ports:
       - 9001:80
-
-  librespeed:
-    image: lscr.io/linuxserver/librespeed:latest
-    container_name: librespeed
-    <<: *environment 
-    <<: *policy 
-    <<: *network 
-    volumes:
-      - ${SERVER_DATA_DIR}/librespeed/config:/config
-    ports:
-      - 9002:80
+    labels:
+      - homepage.group=Admin
+      - homepage.name=Whoami
+      - homepage.container=whoami
+      - homepage.server=my-docker
+      - homepage.description=Check InFormation
+      - homepage.href=http://inverse.local:9001
 
   yacht:
     image: selfhostedpro/yacht
@@ -297,7 +369,10 @@ services:
     <<: *environment
     <<: *network 
     <<: *policy 
-
-# secrets:
-#   secret_file:
-#     file: configs/secrets.txt
+    labels:
+      - homepage.group=Admin
+      - homepage.name=Yacht
+      - homepage.container=yacht
+      - homepage.server=my-docker
+      - homepage.description=Docker Administration
+      - homepage.href=http://inverse.local:9004

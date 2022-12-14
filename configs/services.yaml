@@ -1,98 +1,98 @@
-- Streaming:
+# - Streaming:
 
-    - Jellyfin:
-        href: http://inverse.local:8096
-        container: jellyfin
-        server: my-docker
-        # widget:
-        #     type: sonarr
-        #     url: http://inverse.local:8096
-        #     key: d195e389d696446e80cea6f6791df84a
+#     - Jellyfin:
+#         href: http://inverse.local:8096
+#         container: jellyfin
+#         server: my-docker
+#         # widget:
+#         #     type: sonarr
+#         #     url: http://inverse.local:8096
+#         #     key: d195e389d696446e80cea6f6791df84a
 
-    - Komga:
-        href: http://inverse.local:8002
-        server: my-docker
-        container: komga
+#     - Komga:
+#         href: http://inverse.local:8002
+#         server: my-docker
+#         container: komga
 
-- Media Management:
+# - Media Management:
 
-    - Bazarr:
-        href: http://inverse.local:6001
-        container: bazarr
-        server: my-docker
-        widget:
-            type: bazarr
-            url: http://inverse.local:6001
-            key: 8b2245311b106dc14859d2df4be7d78f
+#     - Bazarr:
+#         href: http://inverse.local:6001
+#         container: bazarr
+#         server: my-docker
+#         widget:
+#             type: bazarr
+#             url: http://inverse.local:6001
+#             key: 8b2245311b106dc14859d2df4be7d78f
 
-    - Radarr:
-        href: http://inverse.local:6002
-        container: radarr
-        server: my-docker
-        widget:
-          type: radarr
-          url: http://inverse.local:6002
-          key: f93184e22792464c9c364f291e09f29c
+#     - Radarr:
+#         href: http://inverse.local:6002
+#         container: radarr
+#         server: my-docker
+#         widget:
+#           type: radarr
+#           url: http://inverse.local:6002
+#           key: f93184e22792464c9c364f291e09f29c
 
-    - Sonarr:
-        href: http://inverse.local:6003
-        container: sonarr
-        server: my-docker
-        widget:
-          type: sonarr
-          url: http://inverse.local:6003
-          key: a5d583908e6341c6b9015f1652b001c2
+#     - Sonarr:
+#         href: http://inverse.local:6003
+#         container: sonarr
+#         server: my-docker
+#         widget:
+#           type: sonarr
+#           url: http://inverse.local:6003
+#           key: a5d583908e6341c6b9015f1652b001c2
 
-- Other Media Management:
-    - Prowlarr:
-        server: my-docker
-        href: http://inverse.local:7001
-        container: prowlarr
+# - Other Media Management:
+#     - Prowlarr:
+#         server: my-docker
+#         href: http://inverse.local:7001
+#         container: prowlarr
 
-    - Transmission:
-        server: my-docker
-        href: http://inverse.local:7003
-        container: transmission
+#     - Transmission:
+#         server: my-docker
+#         href: http://inverse.local:7003
+#         container: transmission
 
-    - Metube:
-        server: my-docker
-        href: http://inverse.local:8081
-        container: metube
+#     - Metube:
+#         server: my-docker
+#         href: http://inverse.local:8081
+#         container: metube
 
-- Server Admin:
-    - Whoami:
-        href: http://inverse.local:9001
-        container: whoami
-        server: my-docker
+# - Server Admin:
+#     # - Whoami:
+#     #     href: http://inverse.local:9001
+#     #     container: whoami
+#     #     server: my-docker
 
 
-    - Files:
-        href: http://inverse.local:8001
-        container: filebrowser
-        server: my-docker
+#     - Files:
+#         href: http://inverse.local:8001
+#         container: filebrowser
+#         server: my-docker
 
-    - Kuma:
-        href: http://inverse.local:8005
-        container: kuma
-        server: my-docker
+#     - Kuma:
+#         href: http://inverse.local:8005
+#         container: kuma
+#         server: my-docker
 
-    - Yacht:
-        href: http://inverse.local:9004
-        container: yacht
-        server: my-docker
+#     - Yacht:
+#         href: http://inverse.local:9004
+#         container: yacht
+#         server: my-docker
 
-    - ChangeDetection:
-        href: http://inverse.local:8010
-        container: changedetection
-        server: my-docker
+#     - ChangeDetection:
+#         href: http://inverse.local:8010
+#         container: changedetection
+#         server: my-docker
 
-- Utils:
-    - Firefox:
-        href: http://inverse.local:8009
-        container: firefox
-        server: my-docker
+# - Utils:
+#     - Firefox:
+#         href: http://inverse.local:8009
+#         container: firefox
+#         server: my-docker
 
-    - Calibre:
-        href: http://inverse.local:8004
-        container: calibre
-        server: my-docker
+#     - Calibre:
+#         href: http://inverse.local:8004
+#         container: calibre
+#         server: my-docker

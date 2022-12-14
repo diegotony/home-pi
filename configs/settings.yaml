@@ -13,15 +13,18 @@ layout:
   Streaming:
     style: row
     columns: 4
+  Media Management:
+    style: row
+    columns: 4
   Downloads:
     style: row
-    columns: 2
+    columns: 4
   Utils:
     style: row
     columns: 4
-  System:
+  Admin:
     style: row
-    columns: 3
+    columns: 4
 
 providers:
   openweathermap: openweathermapapikey
