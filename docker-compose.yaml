@@ -29,20 +29,7 @@ networks:
     driver: bridge
 
 services:
-
-  # local:
-  #   image: b4bz/homer
-  #   container_name: local
-  #   <<: *user 
-  #   <<: *environment 
-  #   <<: *policy 
-  #   <<: *network 
-
-  #   ports:
-  #     - 80:8080
-  #   volumes:
-  #     - ${REPO_CONFIG_DIR}/assets:/www/assets
-
+# Dashboard
   local:
     image: ghcr.io/benphelps/homepage:latest
     container_name: local
@@ -66,6 +53,7 @@ services:
       - homepage.href=http://inverse.local
 
 # Streaming
+
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
@@ -176,7 +164,6 @@ services:
       - homepage.server=my-docker
       - homepage.description=Indexers for Media
       - homepage.href=http://inverse.local:7001
-
 
   transmission:
     image: lscr.io/linuxserver/transmission:latest
@@ -339,6 +326,7 @@ services:
       - homepage.server=my-docker
       - homepage.description=Check Changes in Websites
       - homepage.href=http://inverse.local:8010
+
 # System
 
   whoami:
