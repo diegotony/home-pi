@@ -29,7 +29,9 @@ networks:
     driver: bridge
 
 services:
+
 # Dashboard
+
   local:
     image: ghcr.io/benphelps/homepage:latest
     container_name: local
