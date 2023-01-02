@@ -13,20 +13,21 @@ x-environment: &environment
     # - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
     # - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
 
-
 x-policy: &policy
-    restart: unless-stopped
+  restart: unless-stopped
 
 x-security: &security
-    security_opt:
-      - no-new-privileges:true
+  security_opt:
+    - no-new-privileges:true
 
 x-network: &network
-    networks:
-      - home-network
+  networks:
+    - home-network
+
 networks:
   home-network:
     driver: bridge
+  my-network:
 
 services:
 

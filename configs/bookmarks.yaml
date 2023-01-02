@@ -1,6 +1,18 @@
 ---
 # For configuration options and examples, please see:
 # https://github.com/benphelps/homepage/wiki/Bookmarks
+- Management:
+    - Principal:
+        - abbr: NOT
+          href: https://www.notion.so/Principal-bb22bff85ef542f891bfa66a1826cdb5
+
+    - Projects:
+        - abbr: PRO
+          href: https://www.notion.so/82d752836e5d49bd8a65eabd8cca0052?v=7d28162bdaca40f2b0c9bbf610f3056f
+
+    - Server:
+        - abbr: SER
+          href: https://github.com/diegotony/home-pi
 
 - Developer:
     - Github:
@@ -13,13 +25,3 @@
     - Reddit:
         - abbr: RE
           href: https://reddit.com/
-
-- Entertainment:
-    - YouTube:
-        - abbr: YT
-          href: https://youtube.com/
-
-- Server:
-    - Gitbub:
-        - abbr: HP 
-          href: https://github.com/diegotony/home-pi
