@@ -16,6 +16,8 @@ Setup of local server with RP4.
  
 ## Services
 Well in this setup, I have deployed some docker apps, as like:
+- Dashboard
+    - Homepage
 - Streaming
     - Jellyfin
     - Komga
@@ -35,6 +37,7 @@ Well in this setup, I have deployed some docker apps, as like:
 - Utils
     - Firefox
     - Calibre
+    - Change Detection
 
 ## Dashboard
 I have used [Homepage](https://github.com/benphelps/homepage), because, I can load the setup in files, and I dont lose the setup if server fails. The setup are in *configs/* folder.
