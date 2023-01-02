@@ -57,6 +57,54 @@ services:
 
 # Streaming
 
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    <<: *environment
+    <<: *policy
+    network_mode: 'host'
+    ports:
+      -  8096:8096/tcp
+    volumes:
+      - ${SERVER_DATA_DIR}/jellyfin/config:/config
+      - ${SERVER_DATA_DIR}/jellyfin/cache:/cache
+      - ${SERVER_STORAGE_DIR}:/media #optional
+      - ${SERVER_DATA_DIR}/jellyfin/media2:/media2:ro
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
+      - ${REPO_CONFIG_DIR}/configs:/run/secrets #optional
+
+    labels:
+      - homepage.group=Streaming
+      - homepage.name=Jellyfin
+      - homepage.container=jellyfin
+      - homepage.server=my-docker
+      - homepage.description=Watch Media
+      - homepage.href=http://inverse.local:8096
+
+  komga:
+    image: gotson/komga
+    container_name: komga
+    <<: *environment
+    <<: *policy
+    <<: *security
+    <<: *network
+    volumes:
+      - ${SERVER_DATA_DIR}/komga/config:/config
+      - ${SERVER_STORAGE_DIR}:/data
+      # - /etc/timezone:/etc/timezone
+    ports:
+      - 8002:8080
+    # user: "1000:1000"
+    labels:
+      - homepage.group=Streaming
+      - homepage.name=Komga
+      - homepage.container=komga
+      - homepage.server=my-docker
+      - homepage.description=Read Ebooks
+      - homepage.href=http://inverse.local:8002
+
+# Media Management
+
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
@@ -120,29 +168,6 @@ services:
       - homepage.description=Download Series
       - homepage.href=http://inverse.local:6003
 
-  jellyfin:
-    image: jellyfin/jellyfin
-    container_name: jellyfin
-    <<: *environment
-    <<: *policy
-    network_mode: 'host'
-    ports:
-      -  8096:8096/tcp
-    volumes:
-      - ${SERVER_DATA_DIR}/jellyfin/config:/config
-      - ${SERVER_DATA_DIR}/jellyfin/cache:/cache
-      - ${SERVER_STORAGE_DIR}:/media #optional
-      - ${SERVER_DATA_DIR}/jellyfin/media2:/media2:ro
-      - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
-      - ${REPO_CONFIG_DIR}/configs:/run/secrets #optional
-
-    labels:
-      - homepage.group=Streaming
-      - homepage.name=Jellyfin
-      - homepage.container=jellyfin
-      - homepage.server=my-docker
-      - homepage.description=Watch Media
-      - homepage.href=http://inverse.local:8096
 
 # Indexers
 
@@ -207,7 +232,24 @@ services:
       - homepage.description=Download Youtube
       - homepage.href=http://inverse.local:8081
 
-# Utils
+# Server Admnin
+
+  whoami:
+    image: containous/whoami:latest
+    container_name: whoami
+    <<: *user 
+    <<: *environment 
+    <<: *policy 
+    <<: *network 
+    ports:
+      - 9001:80
+    labels:
+      - homepage.group=Admin
+      - homepage.name=Whoami
+      - homepage.container=whoami
+      - homepage.server=my-docker
+      - homepage.description=Check InFormation
+      - homepage.href=http://inverse.local:9001
 
   filebrowser:
     image: filebrowser/filebrowser:s6
@@ -230,27 +272,44 @@ services:
       - homepage.description=Explorer
       - homepage.href=http://inverse.local:8001
 
-  komga:
-    image: gotson/komga
-    container_name: komga
-    <<: *environment
-    <<: *policy
-    <<: *security
-    <<: *network
+  kuma:
+    container_name: kuma
+    image: louislam/uptime-kuma:1
+    <<: *environment 
+    <<: *policy 
+    <<: *network 
     volumes:
-      - ${SERVER_DATA_DIR}/komga/config:/config
-      - ${SERVER_STORAGE_DIR}:/data
-      # - /etc/timezone:/etc/timezone
+      -  ${SERVER_DATA_DIR}/uptime-kuma/config:/app/data
     ports:
-      - 8002:8080
-    # user: "1000:1000"
+      - "8005:3001"
     labels:
-      - homepage.group=Streaming
-      - homepage.name=Komga
-      - homepage.container=komga
+      - homepage.group=Utils
+      - homepage.name=Kuma
+      - homepage.container=kuma
       - homepage.server=my-docker
-      - homepage.description=Read Ebooks
-      - homepage.href=http://inverse.local:8002
+      - homepage.description=Check Status in Web Pages
+      - homepage.href=http://inverse.local:8005
+
+  yacht:
+    image: selfhostedpro/yacht
+    container_name: yacht
+    ports:
+      - 9004:8000
+    volumes:
+      - ${SERVER_DATA_DIR}/yacht/config:/config
+      - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
+    <<: *environment
+    <<: *network 
+    <<: *policy 
+    labels:
+      - homepage.group=Admin
+      - homepage.name=Yacht
+      - homepage.container=yacht
+      - homepage.server=my-docker
+      - homepage.description=Docker Administration
+      - homepage.href=http://inverse.local:9004
+
+# Utils
 
   calibre:
     image:  lscr.io/linuxserver/calibre:latest
@@ -273,24 +332,6 @@ services:
       - homepage.server=my-docker
       - homepage.description=Management Books
       - homepage.href=http://inverse.local:8004
-
-  kuma:
-    container_name: kuma
-    image: louislam/uptime-kuma:1
-    <<: *environment 
-    <<: *policy 
-    <<: *network 
-    volumes:
-      -  ${SERVER_DATA_DIR}/uptime-kuma/config:/app/data
-    ports:
-      - "8005:3001"
-    labels:
-      - homepage.group=Utils
-      - homepage.name=Kuma
-      - homepage.container=kuma
-      - homepage.server=my-docker
-      - homepage.description=Check Status in Web Pages
-      - homepage.href=http://inverse.local:8005
 
   firefox:
     image: lscr.io/linuxserver/firefox:latest
@@ -329,41 +370,3 @@ services:
       - homepage.server=my-docker
       - homepage.description=Check Changes in Websites
       - homepage.href=http://inverse.local:8010
-
-# System
-
-  whoami:
-    image: containous/whoami:latest
-    container_name: whoami
-    <<: *user 
-    <<: *environment 
-    <<: *policy 
-    <<: *network 
-    ports:
-      - 9001:80
-    labels:
-      - homepage.group=Admin
-      - homepage.name=Whoami
-      - homepage.container=whoami
-      - homepage.server=my-docker
-      - homepage.description=Check InFormation
-      - homepage.href=http://inverse.local:9001
-
-  yacht:
-    image: selfhostedpro/yacht
-    container_name: yacht
-    ports:
-      - 9004:8000
-    volumes:
-      - ${SERVER_DATA_DIR}/yacht/config:/config
-      - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
-    <<: *environment
-    <<: *network 
-    <<: *policy 
-    labels:
-      - homepage.group=Admin
-      - homepage.name=Yacht
-      - homepage.container=yacht
-      - homepage.server=my-docker
-      - homepage.description=Docker Administration
-      - homepage.href=http://inverse.local:9004
