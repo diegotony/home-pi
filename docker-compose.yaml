@@ -54,8 +54,7 @@ services:
       - homepage.server=my-docker
       - homepage.description=Me Dashboard
       - homepage.href=http://inverse.local
-
-# Streaming
+      - com.centurylinklabs.watchtower.enable=true
 
   jellyfin:
     image: jellyfin/jellyfin
@@ -71,7 +70,6 @@ services:
       - ${SERVER_STORAGE_DIR}:/media #optional
       - ${SERVER_DATA_DIR}/jellyfin/media2:/media2:ro
       - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
-      - ${REPO_CONFIG_DIR}/configs:/run/secrets #optional
 
     labels:
       - homepage.group=Streaming
@@ -80,6 +78,7 @@ services:
       - homepage.server=my-docker
       - homepage.description=Watch Media
       - homepage.href=http://inverse.local:8096
+      - com.centurylinklabs.watchtower.enable=true
 
   komga:
     image: gotson/komga
@@ -102,6 +101,7 @@ services:
       - homepage.server=my-docker
       - homepage.description=Read Ebooks
       - homepage.href=http://inverse.local:8002
+      - com.centurylinklabs.watchtower.enable=true
 
 # Media Management
 
@@ -111,8 +111,6 @@ services:
     <<: *environment
     <<: *policy
     <<: *network 
-    secrets:
-      - secret_file
     volumes:
       - ${SERVER_DATA_DIR}/bazarr/config:/config
       - ${SERVER_STORAGE_DIR}/movies:/movies #optional
@@ -126,6 +124,8 @@ services:
       - homepage.server=my-docker
       - homepage.description=Download Subtitles
       - homepage.href=http://inverse.local:6001
+      - com.centurylinklabs.watchtower.enable=true
+
 
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -147,6 +147,7 @@ services:
       - homepage.server=my-docker
       - homepage.description=Download Movies
       - homepage.href=http://inverse.local:6002
+      - com.centurylinklabs.watchtower.enable=true
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -167,7 +168,7 @@ services:
       - homepage.server=my-docker
       - homepage.description=Download Series
       - homepage.href=http://inverse.local:6003
-
+      - com.centurylinklabs.watchtower.enable=true
 
 # Indexers
 
@@ -192,6 +193,7 @@ services:
       - homepage.server=my-docker
       - homepage.description=Indexers for Media
       - homepage.href=http://inverse.local:7001
+      - com.centurylinklabs.watchtower.enable=true
 
   transmission:
     image: lscr.io/linuxserver/transmission:latest
@@ -215,6 +217,7 @@ services:
       - homepage.server=my-docker
       - homepage.description=Download Torrents
       - homepage.href=http://inverse.local:7003
+      - com.centurylinklabs.watchtower.enable=true
   
   metube:
     image: alexta69/metube
@@ -231,6 +234,7 @@ services:
       - homepage.server=my-docker
       - homepage.description=Download Youtube
       - homepage.href=http://inverse.local:8081
+      - com.centurylinklabs.watchtower.enable=true
 
 # Server Admnin
 
@@ -250,6 +254,7 @@ services:
       - homepage.server=my-docker
       - homepage.description=Check InFormation
       - homepage.href=http://inverse.local:9001
+      - com.centurylinklabs.watchtower.enable=true
 
   filebrowser:
     image: filebrowser/filebrowser:s6
@@ -271,6 +276,7 @@ services:
       - homepage.server=my-docker
       - homepage.description=Explorer
       - homepage.href=http://inverse.local:8001
+      - com.centurylinklabs.watchtower.enable=true
 
   kuma:
     container_name: kuma
@@ -289,6 +295,7 @@ services:
       - homepage.server=my-docker
       - homepage.description=Check Status in Web Pages
       - homepage.href=http://inverse.local:8005
+      - com.centurylinklabs.watchtower.enable=true
 
   yacht:
     image: selfhostedpro/yacht
@@ -308,6 +315,28 @@ services:
       - homepage.server=my-docker
       - homepage.description=Docker Administration
       - homepage.href=http://inverse.local:9004
+      - com.centurylinklabs.watchtower.enable=true
+
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    hostname: watchtower
+    environment:
+      WATCHTOWER_LABEL_ENABLE: 1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # - /root/.docker/config.json:/config.json
+    <<: *policy 
+    command: --interval 30 --debug true sonarr radarr bazarr firefox calibre metube transmission prowlarr komga jellyfin
+    labels:
+      - homepage.group=Admin
+      - homepage.name=WatchTower
+      - homepage.container=watchtower
+      - homepage.server=my-docker
+      - homepage.description=Update Containers
+      - homepage.href=http://inverse.local:9005
+      - com.centurylinklabs.watchtower.enable=true
 
 # Utils
 
@@ -325,6 +354,7 @@ services:
       - ${SERVER_STORAGE_DIR}/mybooks:/books
       - ${SERVER_STORAGE_DIR}/manga:/manga
       - ${SERVER_STORAGE_DIR}/comics:/comics
+      - ${SERVER_STORAGE_DIR}/reduced-size:/reduced
     labels:
       - homepage.group=Utils
       - homepage.name=Calibre
@@ -332,6 +362,7 @@ services:
       - homepage.server=my-docker
       - homepage.description=Management Books
       - homepage.href=http://inverse.local:8004
+      - com.centurylinklabs.watchtower.enable=true
 
   firefox:
     image: lscr.io/linuxserver/firefox:latest
@@ -352,6 +383,7 @@ services:
       - homepage.server=my-docker
       - homepage.description=Provisional Browser
       - homepage.href=http://inverse.local:8009
+      - com.centurylinklabs.watchtower.enable=true
 
   changedetection:
     image: lscr.io/linuxserver/changedetection.io:latest
@@ -370,3 +402,4 @@ services:
       - homepage.server=my-docker
       - homepage.description=Check Changes in Websites
       - homepage.href=http://inverse.local:8010
+      - com.centurylinklabs.watchtower.enable=true
