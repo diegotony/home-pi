@@ -42,3 +42,6 @@ Well in this setup, I have deployed some docker apps, as like:
 ## Dashboard
 I have used [Homepage](https://github.com/benphelps/homepage), because, I can load the setup in files, and I dont lose the setup if server fails. The setup are in *configs/* folder.
 
+## Mobile Apps
+You can use Jellyfin App in Android Store link [here](https://play.google.com/store/apps/details?id=org.jellyfin.androidtv&hl=es_419&gl=US&pli=1)
+
