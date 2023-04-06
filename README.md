@@ -42,3 +42,9 @@ Well in this setup, I have deployed some docker apps, as like:
 ## Dashboard
 I have used [Homepage](https://github.com/benphelps/homepage), because, I can load the setup in files, and I dont lose the setup if server fails. The setup are in *configs/* folder.
 
+## Dependencies
+```bash
+sudo apt-get install build-essential
+
+curl -fsSL https://raw.githubusercontent.com/tilt-dev/tilt/master/scripts/install.sh | bash
+``
