@@ -5,13 +5,9 @@ x-user: &user
  
 x-environment: &environment
   environment:
-    # - INIT_ASSETS=0 # default
     - PUID=1000
     - PGID=1000
     - TZ=America/Guayaquil
-    # - FILE__SECRET=/run/secrets/secret_file
-    # - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
-    # - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
 
 x-policy: &policy
   restart: unless-stopped
