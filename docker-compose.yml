@@ -49,7 +49,7 @@ services:
       - homepage.container=local
       - homepage.server=my-docker
       - homepage.description=Me Dashboard
-      - homepage.href=http://inverse.local
+      - homepage.href=http://${IP_ADDRESS_G}
       - com.centurylinklabs.watchtower.enable=true
 
   jellyfin:
@@ -73,7 +73,7 @@ services:
       - homepage.container=jellyfin
       - homepage.server=my-docker
       - homepage.description=Watch Media
-      - homepage.href=http://inverse.local:8096
+      - homepage.href=http://${IP_ADDRESS_G}:8096
       - com.centurylinklabs.watchtower.enable=true
 
   komga:
@@ -96,7 +96,7 @@ services:
       - homepage.container=komga
       - homepage.server=my-docker
       - homepage.description=Read Ebooks
-      - homepage.href=http://inverse.local:8002
+      - homepage.href=http://${IP_ADDRESS_G}:8002
       - com.centurylinklabs.watchtower.enable=true
 
 # Media Management
@@ -119,7 +119,7 @@ services:
       - homepage.container=bazarr
       - homepage.server=my-docker
       - homepage.description=Download Subtitles
-      - homepage.href=http://inverse.local:6001
+      - homepage.href=http://${IP_ADDRESS_G}:6001
       - com.centurylinklabs.watchtower.enable=true
 
 
@@ -142,7 +142,7 @@ services:
       - homepage.container=radarr
       - homepage.server=my-docker
       - homepage.description=Download Movies
-      - homepage.href=http://inverse.local:6002
+      - homepage.href=http://${IP_ADDRESS_G}:6002
       - com.centurylinklabs.watchtower.enable=true
 
   sonarr:
@@ -163,7 +163,7 @@ services:
       - homepage.container=sonarr
       - homepage.server=my-docker
       - homepage.description=Download Series
-      - homepage.href=http://inverse.local:6003
+      - homepage.href=http://${IP_ADDRESS_G}:6003
       - com.centurylinklabs.watchtower.enable=true
 
 # Indexers
@@ -188,7 +188,7 @@ services:
       - homepage.container=prowlarr
       - homepage.server=my-docker
       - homepage.description=Indexers for Media
-      - homepage.href=http://inverse.local:7001
+      - homepage.href=http://${IP_ADDRESS_G}:7001
       - com.centurylinklabs.watchtower.enable=true
 
   transmission:
@@ -212,7 +212,7 @@ services:
       - homepage.container=transmission
       - homepage.server=my-docker
       - homepage.description=Download Torrents
-      - homepage.href=http://inverse.local:7003
+      - homepage.href=http://${IP_ADDRESS_G}:7003
       - com.centurylinklabs.watchtower.enable=true
   
   metube:
@@ -229,7 +229,7 @@ services:
       - homepage.container=metube
       - homepage.server=my-docker
       - homepage.description=Download Youtube
-      - homepage.href=http://inverse.local:8081
+      - homepage.href=http://${IP_ADDRESS_G}:8081
       - com.centurylinklabs.watchtower.enable=true
 
 # Server Admnin
@@ -249,7 +249,7 @@ services:
       - homepage.container=whoami
       - homepage.server=my-docker
       - homepage.description=Check InFormation
-      - homepage.href=http://inverse.local:9001
+      - homepage.href=http://${IP_ADDRESS_G}:9001
       - com.centurylinklabs.watchtower.enable=true
 
   filebrowser:
@@ -271,7 +271,7 @@ services:
       - homepage.container=filebrowser
       - homepage.server=my-docker
       - homepage.description=Explorer
-      - homepage.href=http://inverse.local:8001
+      - homepage.href=http://${IP_ADDRESS_G}:8001
       - com.centurylinklabs.watchtower.enable=true
 
   kuma:
@@ -290,7 +290,7 @@ services:
       - homepage.container=kuma
       - homepage.server=my-docker
       - homepage.description=Check Status in Web Pages
-      - homepage.href=http://inverse.local:8005
+      - homepage.href=http://${IP_ADDRESS_G}:8005
       - com.centurylinklabs.watchtower.enable=true
 
   yacht:
@@ -310,7 +310,7 @@ services:
       - homepage.container=yacht
       - homepage.server=my-docker
       - homepage.description=Docker Administration
-      - homepage.href=http://inverse.local:9004
+      - homepage.href=http://${IP_ADDRESS_G}:9004
       - com.centurylinklabs.watchtower.enable=true
 
 
@@ -331,7 +331,7 @@ services:
       - homepage.container=watchtower
       - homepage.server=my-docker
       - homepage.description=Update Containers
-      - homepage.href=http://inverse.local:9005
+      - homepage.href=http://${IP_ADDRESS_G}:9005
       - com.centurylinklabs.watchtower.enable=true
 
 # Utils
@@ -357,7 +357,7 @@ services:
       - homepage.container=calibre
       - homepage.server=my-docker
       - homepage.description=Management Books
-      - homepage.href=http://inverse.local:8004
+      - homepage.href=http://${IP_ADDRESS_G}:8004
       - com.centurylinklabs.watchtower.enable=true
 
   firefox:
@@ -378,7 +378,7 @@ services:
       - homepage.container=firefox
       - homepage.server=my-docker
       - homepage.description=Provisional Browser
-      - homepage.href=http://inverse.local:8009
+      - homepage.href=http://${IP_ADDRESS_G}:8009
       - com.centurylinklabs.watchtower.enable=true
 
   changedetection:
@@ -397,5 +397,5 @@ services:
       - homepage.container=changedetection
       - homepage.server=my-docker
       - homepage.description=Check Changes in Websites
-      - homepage.href=http://inverse.local:8010
+      - homepage.href=http://${IP_ADDRESS_G}:8010
       - com.centurylinklabs.watchtower.enable=true
