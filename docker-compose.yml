@@ -26,9 +26,7 @@ networks:
   my-network:
 
 services:
-
 # Dashboard
-
   local:
     image: ghcr.io/benphelps/homepage:latest
     container_name: local
