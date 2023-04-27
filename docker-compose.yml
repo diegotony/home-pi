@@ -168,10 +168,37 @@ services:
 
 # Indexers
 
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - AUTO_UPDATE=true #optional
+      - RUN_OPTS= #optional
+    volumes:
+      - ${SERVER_DATA_DIR}/jackett/config:/config
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
+    ports:
+      - 7009:9117
+
+    <<: *security
+    <<: *network
+    <<: *policy
+
+    labels:
+      - homepage.group=Media Management
+      - homepage.name=jackett
+      - homepage.container=jackett
+      - homepage.server=my-docker
+      - homepage.description=Indexers for Media
+      - homepage.href=http://${IP_ADDRESS_G}:7009
+      - com.centurylinklabs.watchtower.enable=true
+
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:develop
     container_name: prowlarr
-    environment:
     <<: *environment
     <<: *policy
     <<: *security
