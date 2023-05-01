@@ -34,6 +34,7 @@ Well in this setup, I have deployed some docker apps, as like:
     - Files
     - Kuma
     - Yacht
+    - Ngrok
 - Utils
     - Firefox
     - Calibre

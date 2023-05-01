@@ -120,7 +120,6 @@ services:
       - homepage.href=http://${IP_ADDRESS_G}:6001
       - com.centurylinklabs.watchtower.enable=true
 
-
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
@@ -299,45 +298,67 @@ services:
       - homepage.href=http://${IP_ADDRESS_G}:8001
       - com.centurylinklabs.watchtower.enable=true
 
-  kuma:
-    container_name: kuma
-    image: louislam/uptime-kuma:1
-    <<: *environment 
-    <<: *policy 
-    <<: *network 
+  ngrok:
+    image: ngrok/ngrok:latest
+    container_name: ngrok
+    <<: *policy
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK}
+    command:
+      - "start"
+      - "--all"
+      - "--config"
+      - "/etc/ngrok.yml"
     volumes:
-      -  ${SERVER_DATA_DIR}/uptime-kuma/config:/app/data
+      - ${REPO_CONFIG_DIR}/configs/ngrok.yml:/etc/ngrok.yml
     ports:
-      - "8005:3001"
-    labels:
-      - homepage.group=Utils
-      - homepage.name=Kuma
-      - homepage.container=kuma
-      - homepage.server=my-docker
-      - homepage.description=Check Status in Web Pages
-      - homepage.href=http://${IP_ADDRESS_G}:8005
-      - com.centurylinklabs.watchtower.enable=true
-
-  yacht:
-    image: selfhostedpro/yacht
-    container_name: yacht
-    ports:
-      - 9004:8000
-    volumes:
-      - ${SERVER_DATA_DIR}/yacht/config:/config
-      - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
-    <<: *environment
-    <<: *network 
-    <<: *policy 
+      - 4040:4040
     labels:
       - homepage.group=Admin
-      - homepage.name=Yacht
-      - homepage.container=yacht
+      - homepage.name=Ngrok
+      - homepage.container=ngrok
       - homepage.server=my-docker
-      - homepage.description=Docker Administration
-      - homepage.href=http://${IP_ADDRESS_G}:9004
-      - com.centurylinklabs.watchtower.enable=true
+      - homepage.description=Tunnel Administration
+      - homepage.href=http://${IP_ADDRESS_G}:4040
 
+  # kuma:
+  #   container_name: kuma
+  #   image: louislam/uptime-kuma:1
+  #   <<: *environment 
+  #   <<: *policy 
+  #   <<: *network 
+  #   volumes:
+  #     -  ${SERVER_DATA_DIR}/uptime-kuma/config:/app/data
+  #   ports:
+  #     - "8005:3001"
+  #   labels:
+  #     - homepage.group=Utils
+  #     - homepage.name=Kuma
+  #     - homepage.container=kuma
+  #     - homepage.server=my-docker
+  #     - homepage.description=Check Status in Web Pages
+  #     - homepage.href=http://${IP_ADDRESS_G}:8005
+  #     - com.centurylinklabs.watchtower.enable=true
+
+  # yacht:
+  #   image: selfhostedpro/yacht
+  #   container_name: yacht
+  #   ports:
+  #     - 9004:8000
+  #   volumes:
+  #     - ${SERVER_DATA_DIR}/yacht/config:/config
+  #     - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
+  #   <<: *environment
+  #   <<: *network 
+  #   <<: *policy 
+  #   labels:
+  #     - homepage.group=Admin
+  #     - homepage.name=Yacht
+  #     - homepage.container=yacht
+  #     - homepage.server=my-docker
+  #     - homepage.description=Docker Administration
+  #     - homepage.href=http://${IP_ADDRESS_G}:9004
+  #     - com.centurylinklabs.watchtower.enable=true
 
   watchtower:
     image: containrrr/watchtower
@@ -349,7 +370,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       # - /root/.docker/config.json:/config.json
     <<: *policy 
-    command: --interval 30 --debug true sonarr radarr bazarr firefox calibre metube transmission prowlarr komga jellyfin
+    command: --interval 30 --debug true sonarr radarr bazarr firefox calibre metube transmission prowlarr komga jellyfin jackett
     labels:
       - homepage.group=Admin
       - homepage.name=WatchTower
@@ -406,21 +427,21 @@ services:
       - homepage.href=http://${IP_ADDRESS_G}:8009
       - com.centurylinklabs.watchtower.enable=true
 
-  changedetection:
-    image: lscr.io/linuxserver/changedetection.io:latest
-    container_name: changedetection
-    <<: *environment 
-    <<: *policy 
-    <<: *network 
-    volumes:
-      - ${SERVER_DATA_DIR}/changedetection/config:/config
-    ports:
-      - 8010:5000
-    labels:
-      - homepage.group=Utils
-      - homepage.name=ChangeDetection
-      - homepage.container=changedetection
-      - homepage.server=my-docker
-      - homepage.description=Check Changes in Websites
-      - homepage.href=http://${IP_ADDRESS_G}:8010
-      - com.centurylinklabs.watchtower.enable=true
+  # changedetection:
+  #   image: lscr.io/linuxserver/changedetection.io:latest
+  #   container_name: changedetection
+  #   <<: *environment 
+  #   <<: *policy 
+  #   <<: *network 
+  #   volumes:
+  #     - ${SERVER_DATA_DIR}/changedetection/config:/config
+  #   ports:
+  #     - 8010:5000
+  #   labels:
+  #     - homepage.group=Utils
+  #     - homepage.name=ChangeDetection
+  #     - homepage.container=changedetection
+  #     - homepage.server=my-docker
+  #     - homepage.description=Check Changes in Websites
+  #     - homepage.href=http://${IP_ADDRESS_G}:8010
+  #     - com.centurylinklabs.watchtower.enable=true

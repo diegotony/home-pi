@@ -1,0 +1,46 @@
+console_ui: true
+console_ui_color: transparent
+dns_resolver_ips: 
+  - 1.1.1.1
+  - 8.8.8.8
+region: us
+version: 2
+remote_management: false
+# web_allow_hosts:
+#   - inverse.local
+#   - 192.168.1.6
+
+tunnels:
+  jellyfin:
+    addr: http://192.168.1.6:8096
+    schemes: 
+      - https
+    proto: http
+
+  # e2etls:
+  #   addr: 9000
+  #   proto: tls
+  #   hostname: myapp.example.com
+  #   crt: example.crt
+  #   key: example.key
+    
+  # iprestriction:
+  #   ip_restriction:
+  #     allow_cidrs:
+  #       - 1.1.1.1/32
+  #   addr: 8000
+  #   proto: tcp
+    
+  # ssh-access:
+  #   addr: 22
+  #   proto: tcp
+  #   remote_addr: 1.tcp.ngrok.io:12345
+  
+  # my-cool-website:
+  #   labels:
+  #     - region=us-east
+  #     - team=infra
+  #   addr: 8000
+  #   oauth:
+  #     provider: google
+  #   inspect: false
