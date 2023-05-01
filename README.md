@@ -48,7 +48,7 @@ I have used [Homepage](https://github.com/benphelps/homepage), because, I can lo
 sudo apt-get install build-essential
 
 curl -fsSL https://raw.githubusercontent.com/tilt-dev/tilt/master/scripts/install.sh | bash
-``
+```
 ## Mobile Apps
 You can use Jellyfin App in Android Store link [here](https://play.google.com/store/apps/details?id=org.jellyfin.androidtv&hl=es_419&gl=US&pli=1)
 
