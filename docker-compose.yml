@@ -321,45 +321,6 @@ services:
       - homepage.description=Tunnel Administration
       - homepage.href=http://${IP_ADDRESS_G}:4040
 
-  # kuma:
-  #   container_name: kuma
-  #   image: louislam/uptime-kuma:1
-  #   <<: *environment 
-  #   <<: *policy 
-  #   <<: *network 
-  #   volumes:
-  #     -  ${SERVER_DATA_DIR}/uptime-kuma/config:/app/data
-  #   ports:
-  #     - "8005:3001"
-  #   labels:
-  #     - homepage.group=Utils
-  #     - homepage.name=Kuma
-  #     - homepage.container=kuma
-  #     - homepage.server=my-docker
-  #     - homepage.description=Check Status in Web Pages
-  #     - homepage.href=http://${IP_ADDRESS_G}:8005
-  #     - com.centurylinklabs.watchtower.enable=true
-
-  # yacht:
-  #   image: selfhostedpro/yacht
-  #   container_name: yacht
-  #   ports:
-  #     - 9004:8000
-  #   volumes:
-  #     - ${SERVER_DATA_DIR}/yacht/config:/config
-  #     - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
-  #   <<: *environment
-  #   <<: *network 
-  #   <<: *policy 
-  #   labels:
-  #     - homepage.group=Admin
-  #     - homepage.name=Yacht
-  #     - homepage.container=yacht
-  #     - homepage.server=my-docker
-  #     - homepage.description=Docker Administration
-  #     - homepage.href=http://${IP_ADDRESS_G}:9004
-  #     - com.centurylinklabs.watchtower.enable=true
-
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
@@ -380,8 +341,34 @@ services:
       - homepage.href=http://${IP_ADDRESS_G}:9005
       - com.centurylinklabs.watchtower.enable=true
 
-# Utils
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
+      - "8080:80/tcp"
+    environment:
+      TZ: America/Guayaquil
+      DNSMASQ_LISTENING: "all"
+      WEBPASSWORD: 'SECUREPASSWORD'
+    volumes:
+      - ${SERVER_DATA_DIR}/etc-pihole:/etc/pihole
+      - ${SERVER_DATA_DIR}/etc-dnsmasq.d:/etc/dnsmasq.d
+    cap_add:
+      - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
+    restart: unless-stopped
+    labels:
+      - homepage.group=Admin
+      - homepage.name=Pihole
+      - homepage.container=pihole
+      - homepage.server=my-docker
+      - homepage.description=pihole
+      - homepage.href=http://${IP_ADDRESS_G}:8080/admin
 
+# Utils
   calibre:
     image:  lscr.io/linuxserver/calibre:latest
     container_name: calibre
@@ -426,22 +413,3 @@ services:
       - homepage.description=Provisional Browser
       - homepage.href=http://${IP_ADDRESS_G}:8009
       - com.centurylinklabs.watchtower.enable=true
-
-  # changedetection:
-  #   image: lscr.io/linuxserver/changedetection.io:latest
-  #   container_name: changedetection
-  #   <<: *environment 
-  #   <<: *policy 
-  #   <<: *network 
-  #   volumes:
-  #     - ${SERVER_DATA_DIR}/changedetection/config:/config
-  #   ports:
-  #     - 8010:5000
-  #   labels:
-  #     - homepage.group=Utils
-  #     - homepage.name=ChangeDetection
-  #     - homepage.container=changedetection
-  #     - homepage.server=my-docker
-  #     - homepage.description=Check Changes in Websites
-  #     - homepage.href=http://${IP_ADDRESS_G}:8010
-  #     - com.centurylinklabs.watchtower.enable=true

@@ -59,11 +59,11 @@
 #         href: http://inverse.local:8081
 #         container: metube
 
-- Server Admin:
-    - Tilt:
-        href: http://inverse.local:9001
-        container: whoami
-        server: my-docker
+# - Server Admin:
+#     - Tilt:
+#         href: http://inverse.local:9001
+#         container: whoami
+#         server: my-docker
 #     # - Whoami:
 #     #     href: http://inverse.local:9001
 #     #     container: whoami

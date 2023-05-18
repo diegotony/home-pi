@@ -54,3 +54,8 @@ You can use Jellyfin App in Android Store link [here](https://play.google.com/st
 
 ## Ngrok
 This service is used to connect to Chromecast due to Chromecast only allow HTTPS connections
+
+## Check your hostname
+```
+hostname -I
+```
