@@ -57,3 +57,12 @@ This service is used to connect to Chromecast due to Chromecast only allow HTTPS
 ```
 hostname -I
 ```
+## Set this env vars
+```
+SERVER_STORAGE_DIR=<storage-location>
+SERVER_DATA_DIR=/apps/
+REPO_CONFIG_DIR=<home-pi-location>
+DOMAIN_NAME=<server-name>
+IP_ADDRESS_G=<server-ip>
+NGROK=********************
+```
