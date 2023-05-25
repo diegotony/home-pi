@@ -44,7 +44,6 @@ I have used [Homepage](https://github.com/benphelps/homepage), because, I can lo
 ## Dependencies
 ```bash
 sudo apt-get install build-essential
-
 curl -fsSL https://raw.githubusercontent.com/tilt-dev/tilt/master/scripts/install.sh | bash
 ```
 ## Mobile Apps
