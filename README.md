@@ -25,20 +25,18 @@ Well in this setup, I have deployed some docker apps, as like:
     - Bazarr
     - Radarr
     - Sonarr
-- Other Media Management
+    - Jacket
     - Prowlarr
     - Transmission
     - Metube
 - Server Admin
     - Whoami
     - Files
-    - Kuma
-    - Yacht
     - Ngrok
+    - Watchtower
+    - PiHole
 - Utils
-    - Firefox
     - Calibre
-    - Change Detection
 
 ## Dashboard
 I have used [Homepage](https://github.com/benphelps/homepage), because, I can load the setup in files, and I dont lose the setup if server fails. The setup are in *configs/* folder.
