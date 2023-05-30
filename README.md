@@ -56,6 +56,11 @@ This service is used to connect to Chromecast due to Chromecast only allow HTTPS
 ```
 hostname -I
 ```
+
+## Set to Static your Network Config
+
+Change DHCP to STATIC and set ip static 
+
 ## Set this env vars
 ```
 SERVER_STORAGE_DIR=<storage-location>
