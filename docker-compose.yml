@@ -368,6 +368,24 @@ services:
       - homepage.description=pihole
       - homepage.href=http://${IP_ADDRESS_G}:8080/admin
 
+  pi.alert:
+    container_name: pialert
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - TZ=America/Guayaquil
+      - PORT=8096
+    network_mode: "host"
+    restart: unless-stopped
+    image: jokobsk/pi.alert:latest
+    labels:
+      - homepage.group=Admin
+      - homepage.name=pialert
+      - homepage.container=pialert
+      - homepage.server=my-docker
+      - homepage.description=pialert
+      - homepage.href=http://${IP_ADDRESS_G}:8096
+
 # Utils
   calibre:
     image:  lscr.io/linuxserver/calibre:latest
