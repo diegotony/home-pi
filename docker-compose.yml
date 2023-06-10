@@ -11,7 +11,6 @@ x-environment: &environment
 
 x-policy: &policy
   restart: unless-stopped
-
 x-security: &security
   security_opt:
     - no-new-privileges:true
@@ -374,7 +373,7 @@ services:
       - no-new-privileges:true
     environment:
       - TZ=America/Guayaquil
-      - PORT=8096
+      - PORT=8097
     network_mode: "host"
     restart: unless-stopped
     image: jokobsk/pi.alert:latest
@@ -384,7 +383,7 @@ services:
       - homepage.container=pialert
       - homepage.server=my-docker
       - homepage.description=pialert
-      - homepage.href=http://${IP_ADDRESS_G}:8096
+      - homepage.href=http://${IP_ADDRESS_G}:8097
 
 # Utils
   calibre:
