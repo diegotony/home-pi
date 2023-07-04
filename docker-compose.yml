@@ -50,8 +50,8 @@ services:
   jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin
-    <<: [*environment,*policy,*network]
-    # network_mode: 'host'
+    <<: [*environment,*policy]
+    network_mode: 'host'
     ports:
       -  8096:8096/tcp
     volumes:
