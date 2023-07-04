@@ -30,10 +30,7 @@ services:
   local:
     image: ghcr.io/benphelps/homepage:latest
     container_name: local
-    # <<: *user 
-    <<: *environment 
-    <<: *policy 
-    <<: *network 
+    <<: [*environment,*policy,*network]
 
     ports:
       - 80:3000
@@ -53,9 +50,8 @@ services:
   jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin
-    <<: *environment
-    <<: *policy
-    network_mode: 'host'
+    <<: [*environment,*policy,*network]
+    # network_mode: 'host'
     ports:
       -  8096:8096/tcp
     volumes:
@@ -77,17 +73,14 @@ services:
   komga:
     image: gotson/komga
     container_name: komga
-    <<: *environment
-    <<: *policy
-    <<: *security
-    <<: *network
+    <<: [*environment,*policy,*network,*security]
     volumes:
       - ${SERVER_DATA_DIR}/komga/config:/config
       - ${SERVER_STORAGE_DIR}:/data
       # - /etc/timezone:/etc/timezone
     ports:
       - 8002:8080
-    # user: "1000:1000"
+    user: "1000:1000"
     labels:
       - homepage.group=Streaming
       - homepage.name=Komga
@@ -102,9 +95,7 @@ services:
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
-    <<: *environment
-    <<: *policy
-    <<: *network 
+    <<: [*environment,*policy,*network]
     volumes:
       - ${SERVER_DATA_DIR}/bazarr/config:/config
       - ${SERVER_STORAGE_DIR}/movies:/movies #optional
@@ -123,10 +114,7 @@ services:
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
-    <<: *environment
-    <<: *policy
-    <<: *security
-    <<: *network 
+    <<: [*environment,*policy,*network]
     volumes:
       - ${SERVER_DATA_DIR}/overseerr/config:/config
       - ${SERVER_STORAGE_DIR}/movies:/movies #optional
@@ -145,9 +133,7 @@ services:
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
-    <<: *environment
-    <<: *policy
-    <<: *network 
+    <<: [*environment,*policy,*network]
     volumes:
       - ${SERVER_DATA_DIR}/sonarr/config:/config
       - ${SERVER_STORAGE_DIR}/tv:/tv #optional
@@ -168,10 +154,8 @@ services:
   jackett:
     image: lscr.io/linuxserver/jackett:latest
     container_name: jackett
+    <<: [*environment,*policy,*network,*security]
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
       - AUTO_UPDATE=true #optional
       - RUN_OPTS= #optional
     volumes:
@@ -179,10 +163,6 @@ services:
       - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
     ports:
       - 7009:9117
-
-    <<: *security
-    <<: *network
-    <<: *policy
 
     labels:
       - homepage.group=Media Management
@@ -196,11 +176,7 @@ services:
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:develop
     container_name: prowlarr
-    <<: *environment
-    <<: *policy
-    <<: *security
-    <<: *network 
-
+    <<: [*environment,*policy,*network,*security]
     volumes:
       -  ${SERVER_DATA_DIR}/prowlarr/config:/config
     ports:
@@ -218,9 +194,7 @@ services:
   transmission:
     image: lscr.io/linuxserver/transmission:latest
     container_name: transmission
-    <<: *environment 
-    <<: *policy
-    <<: *network 
+    <<: [*environment,*policy,*network,*security]
 
     volumes:
       - ${SERVER_DATA_DIR}/transmission/config:/config
@@ -242,7 +216,7 @@ services:
   metube:
     image: alexta69/metube
     container_name: metube
-    restart: unless-stopped
+    <<: [*environment,*policy,*network,*security]
     ports:
       - "8081:8081"
     volumes:
@@ -261,10 +235,7 @@ services:
   whoami:
     image: containous/whoami:latest
     container_name: whoami
-    <<: *user 
-    <<: *environment 
-    <<: *policy 
-    <<: *network 
+    <<: [*environment,*policy,*network,*security,*user]
     ports:
       - 9001:80
     labels:
@@ -279,10 +250,7 @@ services:
   filebrowser:
     image: filebrowser/filebrowser:s6
     container_name: filebrowser
-    <<: *environment 
-    <<: *policy
-    <<: *security
-    <<: *network 
+    <<: [*environment,*policy,*network,*security]
     ports:
       - 8001:80
     volumes:
@@ -301,7 +269,7 @@ services:
   ngrok:
     image: ngrok/ngrok:latest
     container_name: ngrok
-    <<: *policy
+    <<: [*environment,*policy,*network,*security]
     environment:
       - NGROK_AUTHTOKEN=${NGROK}
     command:
@@ -325,12 +293,14 @@ services:
     image: containrrr/watchtower
     container_name: watchtower
     hostname: watchtower
+    
+    <<: [*environment,*policy,*network,*security]
+
     environment:
       WATCHTOWER_LABEL_ENABLE: 1
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       # - /root/.docker/config.json:/config.json
-    <<: *policy 
     command: --interval 30 --debug true sonarr radarr bazarr firefox calibre metube transmission prowlarr komga jellyfin jackett
     labels:
       - homepage.group=Admin
@@ -344,7 +314,7 @@ services:
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
-    # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
+    <<: [*environment,*policy,*security]
     ports:
       - "53:53/tcp"
       - "53:53/udp"
@@ -359,7 +329,6 @@ services:
       - ${SERVER_DATA_DIR}/etc-dnsmasq.d:/etc/dnsmasq.d
     cap_add:
       - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
-    restart: unless-stopped
     labels:
       - homepage.group=Admin
       - homepage.name=Pihole
@@ -370,29 +339,24 @@ services:
 
   pi.alert:
     container_name: pialert
-    security_opt:
-      - no-new-privileges:true
-    environment:
-      - TZ=America/Guayaquil
-      - PORT=8096
-    network_mode: "host"
-    restart: unless-stopped
     image: jokobsk/pi.alert:latest
+    <<: [*environment,*policy,*security]
+    environment:
+      - PORT=8097
+    network_mode: "host"
     labels:
       - homepage.group=Admin
       - homepage.name=pialert
       - homepage.container=pialert
       - homepage.server=my-docker
       - homepage.description=pialert
-      - homepage.href=http://${IP_ADDRESS_G}:8096
+      - homepage.href=http://${IP_ADDRESS_G}:8097
 
 # Utils
   calibre:
     image:  lscr.io/linuxserver/calibre:latest
     container_name: calibre
-    <<: *environment 
-    <<: *policy
-    <<: *network 
+    <<: [*environment,*policy,*network]
     ports:
       - 8004:8080
       - 8008:8081
