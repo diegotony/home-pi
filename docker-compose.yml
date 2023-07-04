@@ -289,28 +289,6 @@ services:
       - homepage.description=Tunnel Administration
       - homepage.href=http://${IP_ADDRESS_G}:4040
 
-  watchtower:
-    image: containrrr/watchtower
-    container_name: watchtower
-    hostname: watchtower
-    
-    <<: [*environment,*policy,*network,*security]
-
-    environment:
-      WATCHTOWER_LABEL_ENABLE: 1
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      # - /root/.docker/config.json:/config.json
-    command: --interval 30 --debug true sonarr radarr bazarr firefox calibre metube transmission prowlarr komga jellyfin jackett
-    labels:
-      - homepage.group=Admin
-      - homepage.name=WatchTower
-      - homepage.container=watchtower
-      - homepage.server=my-docker
-      - homepage.description=Update Containers
-      - homepage.href=http://${IP_ADDRESS_G}:9005
-      - com.centurylinklabs.watchtower.enable=true
-
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
