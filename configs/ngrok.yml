@@ -11,11 +11,18 @@ remote_management: false
 #   - 192.168.1.6
 
 tunnels:
-  jellyfin:
-    addr: http://192.168.1.6:8096
+  # jellyfin:
+  #   addr: http://192.168.1.6:8096
+  #   schemes: 
+  #     - https
+  #   proto: http
+
+  files:
+    addr: http://192.168.1.6:8001
     schemes: 
       - https
     proto: http
+
 
   # e2etls:
   #   addr: 9000

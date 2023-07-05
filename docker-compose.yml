@@ -63,32 +63,34 @@ services:
 
     labels:
       - homepage.group=Streaming
-      - homepage.name=Jellyfin
+      - homepage.name=Watch
       - homepage.container=jellyfin
       - homepage.server=my-docker
-      - homepage.description=Watch Media
+      - homepage.description=Jellyfin
       - homepage.href=http://${IP_ADDRESS_G}:8096
       - com.centurylinklabs.watchtower.enable=true
 
-  komga:
-    image: gotson/komga
-    container_name: komga
-    <<: [*environment,*policy,*network,*security]
+
+  kavita:
+    image: kizaing/kavita:latest
+    container_name: kavita
+    <<: [*policy,*network]
+
     volumes:
-      - ${SERVER_DATA_DIR}/komga/config:/config
-      - ${SERVER_STORAGE_DIR}:/data
-      # - /etc/timezone:/etc/timezone
+      - ${SERVER_DATA_DIR}/kavita/config:/kavita/config
+      - ${SERVER_STORAGE_DIR}:/manga
     ports:
-      - 8002:8080
-    user: "1000:1000"
+        - 8083:5000
+    restart: unless-stopped
     labels:
-      - homepage.group=Streaming
-      - homepage.name=Komga
-      - homepage.container=komga
-      - homepage.server=my-docker
-      - homepage.description=Read Ebooks
-      - homepage.href=http://${IP_ADDRESS_G}:8002
-      - com.centurylinklabs.watchtower.enable=true
+    - homepage.group=Streaming
+    - homepage.name=Reader
+    - homepage.container=kavita
+    - homepage.server=my-docker
+    - homepage.description=Kavita
+    - homepage.href=http://${IP_ADDRESS_G}:8083
+    - com.centurylinklabs.watchtower.enable=true
+
 
 # Media Management
 
@@ -104,10 +106,10 @@ services:
       - 6001:6767
     labels:
       - homepage.group=Media Management
-      - homepage.name=Bazarr
+      - homepage.name=Subtitles
       - homepage.container=bazarr
       - homepage.server=my-docker
-      - homepage.description=Download Subtitles
+      - homepage.description=Bazarr
       - homepage.href=http://${IP_ADDRESS_G}:6001
       - com.centurylinklabs.watchtower.enable=true
 
@@ -123,10 +125,10 @@ services:
       - 6002:7878
     labels:
       - homepage.group=Media Management
-      - homepage.name=Radarr
+      - homepage.name=Movies
       - homepage.container=radarr
       - homepage.server=my-docker
-      - homepage.description=Download Movies
+      - homepage.description=Radarr
       - homepage.href=http://${IP_ADDRESS_G}:6002
       - com.centurylinklabs.watchtower.enable=true
 
@@ -142,10 +144,10 @@ services:
       - 6003:8989
     labels:
       - homepage.group=Media Management
-      - homepage.name=Sonarr
+      - homepage.name=Series
       - homepage.container=sonarr
       - homepage.server=my-docker
-      - homepage.description=Download Series
+      - homepage.description=Sonarr
       - homepage.href=http://${IP_ADDRESS_G}:6003
       - com.centurylinklabs.watchtower.enable=true
 
@@ -166,10 +168,10 @@ services:
 
     labels:
       - homepage.group=Media Management
-      - homepage.name=jackett
+      - homepage.name=Indexer
       - homepage.container=jackett
       - homepage.server=my-docker
-      - homepage.description=Indexers for Media
+      - homepage.description=jackett
       - homepage.href=http://${IP_ADDRESS_G}:7009
       - com.centurylinklabs.watchtower.enable=true
 
@@ -184,10 +186,10 @@ services:
     restart: unless-stopped
     labels:
       - homepage.group=Media Management
-      - homepage.name=Prowlarr
+      - homepage.name=Indexer
       - homepage.container=prowlarr
       - homepage.server=my-docker
-      - homepage.description=Indexers for Media
+      - homepage.description=Prowlarr
       - homepage.href=http://${IP_ADDRESS_G}:7001
       - com.centurylinklabs.watchtower.enable=true
 
@@ -259,10 +261,10 @@ services:
       # - ${REPO_CONFIG_DIR}/assets/filebrowser.db:/database/filebrowser.db
     labels:
       - homepage.group=Utils
-      - homepage.name=Filebrowser
+      - homepage.name=File Explorer
       - homepage.container=filebrowser
       - homepage.server=my-docker
-      - homepage.description=Explorer
+      - homepage.description=Filebrowser
       - homepage.href=http://${IP_ADDRESS_G}:8001
       - com.centurylinklabs.watchtower.enable=true
 
@@ -283,37 +285,11 @@ services:
       - 4040:4040
     labels:
       - homepage.group=Admin
-      - homepage.name=Ngrok
+      - homepage.name=Tunnel
       - homepage.container=ngrok
       - homepage.server=my-docker
-      - homepage.description=Tunnel Administration
+      - homepage.description=Ngrok
       - homepage.href=http://${IP_ADDRESS_G}:4040
-
-  pihole:
-    container_name: pihole
-    image: pihole/pihole:latest
-    <<: [*environment,*policy,*security]
-    ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
-      - "8080:80/tcp"
-    environment:
-      TZ: America/Guayaquil
-      DNSMASQ_LISTENING: "all"
-      WEBPASSWORD: 'SECUREPASSWORD'
-    volumes:
-      - ${SERVER_DATA_DIR}/etc-pihole:/etc/pihole
-      - ${SERVER_DATA_DIR}/etc-dnsmasq.d:/etc/dnsmasq.d
-    cap_add:
-      - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
-    labels:
-      - homepage.group=Admin
-      - homepage.name=Pihole
-      - homepage.container=pihole
-      - homepage.server=my-docker
-      - homepage.description=pihole
-      - homepage.href=http://${IP_ADDRESS_G}:8080/admin
 
   pi.alert:
     container_name: pialert
@@ -324,10 +300,10 @@ services:
     network_mode: "host"
     labels:
       - homepage.group=Admin
-      - homepage.name=pialert
+      - homepage.name=Checking Network
       - homepage.container=pialert
       - homepage.server=my-docker
-      - homepage.description=pialert
+      - homepage.description=Pi-Alert
       - homepage.href=http://${IP_ADDRESS_G}:8097
 
 # Utils
