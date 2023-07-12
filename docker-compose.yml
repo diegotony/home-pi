@@ -102,6 +102,8 @@ services:
       - ${SERVER_DATA_DIR}/bazarr/config:/config
       - ${SERVER_STORAGE_DIR}/movies:/movies #optional
       - ${SERVER_STORAGE_DIR}/tv:/tv #optional   
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
+
     ports:
       - 6001:6767
     labels:
