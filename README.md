@@ -20,7 +20,7 @@ Well in this setup, I have deployed some docker apps, as like:
     - Homepage
 - Streaming
     - Jellyfin
-    - Komga
+    - Kavita
 - Media Management
     - Bazarr
     - Radarr
@@ -58,7 +58,6 @@ hostname -I
 ```
 
 ## Set to Static your Network Config
-
 Change DHCP to STATIC and set ip static 
 
 ## Set this env vars
