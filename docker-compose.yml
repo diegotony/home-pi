@@ -308,6 +308,29 @@ services:
       - homepage.description=Pi-Alert
       - homepage.href=http://${IP_ADDRESS_G}:8097
 
+  deluge:
+    image: lscr.io/linuxserver/deluge:latest
+    container_name: deluge
+    <<: [*environment,*policy,*network,*security]
+    environment:
+      - PASSWORD=/run/secrets/${PASSWORD}
+    volumes:
+      - ${SERVER_DATA_DIR}/deluge/config:/config
+      - ${SERVER_STORAGE_DIR}/downloads-deluge:/downloads
+
+    ports:
+      - 8112:8112
+      - 6881:6881
+      - 6881:6881/udp
+    labels:
+      - homepage.group=Utils
+      - homepage.name=Torrents
+      - homepage.container=deluge
+      - homepage.server=my-docker
+      - homepage.description=Download Torrents
+      - homepage.href=http://${IP_ADDRESS_G}:8112
+      - com.centurylinklabs.watchtower.enable=true
+
 # Utils
   calibre:
     image:  lscr.io/linuxserver/calibre:latest
