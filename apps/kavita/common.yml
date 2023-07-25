@@ -1,0 +1,47 @@
+version: "3.3"
+
+x-user: &user
+  user: 1000:1000 # default
+ 
+x-environment: &environment
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=America/Guayaquil
+
+x-policy: &policy
+  restart: unless-stopped
+
+x-security: &security
+  security_opt:
+    - no-new-privileges:true
+
+x-network: &network
+  networks:
+    - home-network
+
+networks:
+  home-network:
+    driver: bridge
+  my-network:
+
+services:
+  kavita:
+    image: kizaing/kavita:latest
+    container_name: kavita
+    <<: [*policy,*network]
+
+    volumes:
+      - ${SERVER_DATA_DIR}/kavita/config:/kavita/config
+      - ${SERVER_STORAGE_DIR}:/manga
+    ports:
+        - 8083:5000
+    restart: unless-stopped
+    labels:
+    - homepage.group=Streaming
+    - homepage.name=Reader
+    - homepage.container=kavita
+    - homepage.server=my-docker
+    - homepage.description=Kavita
+    - homepage.href=http://${IP_ADDRESS_G}:8083
+    - com.centurylinklabs.watchtower.enable=true

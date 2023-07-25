@@ -1,0 +1,47 @@
+version: "3.3"
+
+x-user: &user
+  user: 1000:1000 # default
+ 
+x-environment: &environment
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=America/Guayaquil
+
+x-policy: &policy
+  restart: unless-stopped
+
+x-security: &security
+  security_opt:
+    - no-new-privileges:true
+
+x-network: &network
+  networks:
+    - home-network
+
+networks:
+  home-network:
+    driver: bridge
+  my-network:
+
+services:
+  homepage:
+    image: ghcr.io/benphelps/homepage:latest
+    container_name: local
+    <<: [*environment,*policy,*network]
+
+    ports:
+      - 80:3000
+    volumes:
+      - ${REPO_CONFIG_DIR}/configs:/app/config # Make sure your local config directory exists
+      - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
+      - ${REPO_CONFIG_DIR}/images:/app/public/images
+    labels:
+      - homepage.group=Admin
+      - homepage.name=Dashboard
+      - homepage.container=homepage
+      - homepage.server=my-docker
+      - homepage.description=Me Dashboard
+      - homepage.href=http://${IP_ADDRESS_G}
+      - com.centurylinklabs.watchtower.enable=true

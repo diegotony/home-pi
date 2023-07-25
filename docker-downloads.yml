@@ -1,0 +1,106 @@
+version: "3.3"
+
+x-user: &user
+  user: 1000:1000 # default
+ 
+x-environment: &environment
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=America/Guayaquil
+
+x-policy: &policy
+  restart: unless-stopped
+
+x-security: &security
+  security_opt:
+    - no-new-privileges:true
+
+x-network: &network
+  networks:
+    - home-network
+
+networks:
+  home-network:
+    driver: bridge
+  my-network:
+
+services:
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    <<: [*environment,*policy,*network,*security]
+    environment:
+      - AUTO_UPDATE=true #optional
+      - RUN_OPTS= #optional
+    volumes:
+      - ${SERVER_DATA_DIR}/jackett/config:/config
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
+    ports:
+      - 7009:9117
+
+    labels:
+      - homepage.group=Media Management
+      - homepage.name=Indexer
+      - homepage.container=jackett
+      - homepage.server=my-docker
+      - homepage.description=jackett
+      - homepage.href=http://${IP_ADDRESS_G}:7009
+      - com.centurylinklabs.watchtower.enable=true
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:develop
+    container_name: prowlarr
+    <<: [*environment,*policy,*network,*security]
+    volumes:
+      -  ${SERVER_DATA_DIR}/prowlarr/config:/config
+    ports:
+      - 7001:9696
+    restart: unless-stopped
+    labels:
+      - homepage.group=Media Management
+      - homepage.name=Indexer
+      - homepage.container=prowlarr
+      - homepage.server=my-docker
+      - homepage.description=Prowlarr
+      - homepage.href=http://${IP_ADDRESS_G}:7001
+      - com.centurylinklabs.watchtower.enable=true
+
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    <<: [*environment,*policy,*network,*security]
+
+    volumes:
+      - ${SERVER_DATA_DIR}/transmission/config:/config
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads
+      - ${SERVER_STORAGE_DIR}/watch:/watch
+    ports:
+      - 7003:9091
+      - 51413:51413
+      - 51413:51413/udp
+    labels:
+      - homepage.group=Media Management
+      - homepage.name=Transmission
+      - homepage.container=transmission
+      - homepage.server=my-docker
+      - homepage.description=Download Torrents
+      - homepage.href=http://${IP_ADDRESS_G}:7003
+      - com.centurylinklabs.watchtower.enable=true
+  
+  metube:
+    image: alexta69/metube
+    container_name: metube
+    <<: [*environment,*policy,*network,*security]
+    ports:
+      - "8081:8081"
+    volumes:
+      - ${SERVER_STORAGE_DIR}/downloads/youtube:/downloads
+    labels:
+      - homepage.group=Utils
+      - homepage.name=Metube
+      - homepage.container=metube
+      - homepage.server=my-docker
+      - homepage.description=Download Youtube
+      - homepage.href=http://${IP_ADDRESS_G}:8081
+      - com.centurylinklabs.watchtower.enable=true

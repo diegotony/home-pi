@@ -11,6 +11,7 @@ Setup of local server with RP4.
 - Netdata
 - Dropbear
 - X.Org X Server
+- make
 
 > ATTENTION: If you are using DietPi, you can install this tools with the command  `dietpi-software`, you should be root.
  

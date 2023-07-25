@@ -4,6 +4,11 @@ REQUIREMENTS_FILE=requirements.txt
 ENV_FOLDER=.env
 SHELL := /bin/bash
 PIP=${ENV_FOLDER}/bin/pip
+MEDIA_DOCKER=docker-media.yml
+DEFAULT_DOCKER=docker-default.yml
+UTILS_DOCKER=docker-utils.yml
+DOWNLOAD_DOCKER=docker-downloads.yml
+
 .PHONY: help
 
 help:  ## Help
@@ -13,10 +18,12 @@ build: ## Build Docker Services
 	@echo "Building..."
 	docker compose build 
 
-run: build ## Run Docker Services
+up: build ## Up Docker Services
 	@echo "Running..."
-	docker compose up -d --remove-orphans
+	docker compose -f docker-compose-test.yml up --remove-orphans -d
 
-destroy: ## Destroy Docker Services 
-	@echo "Building..."
-	docker compose build 
+down: ## Down Docker Services
+	@echo "Running..."
+	docker compose -f docker-compose-test.yml down --remove-orphans
+
+

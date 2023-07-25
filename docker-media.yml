@@ -1,0 +1,87 @@
+version: "3.3"
+
+x-user: &user
+  user: 1000:1000 # default
+ 
+x-environment: &environment
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=America/Guayaquil
+
+x-policy: &policy
+  restart: unless-stopped
+
+x-security: &security
+  security_opt:
+    - no-new-privileges:true
+
+x-network: &network
+  networks:
+    - home-network
+
+networks:
+  home-network:
+    driver: bridge
+  my-network:
+
+services:
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    <<: [*environment,*policy,*network]
+    volumes:
+      - ${SERVER_DATA_DIR}/bazarr/config:/config
+      - ${SERVER_STORAGE_DIR}/movies:/movies #optional
+      - ${SERVER_STORAGE_DIR}/tv:/tv #optional   
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
+
+    ports:
+      - 6001:6767
+    labels:
+      - homepage.group=Media Management
+      - homepage.name=Subtitles
+      - homepage.container=bazarr
+      - homepage.server=my-docker
+      - homepage.description=Bazarr
+      - homepage.href=http://${IP_ADDRESS_G}:6001
+      - com.centurylinklabs.watchtower.enable=true
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    <<: [*environment,*policy,*network]
+    volumes:
+      - ${SERVER_DATA_DIR}/overseerr/config:/config
+      - ${SERVER_STORAGE_DIR}/movies:/movies #optional
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
+    ports:
+      - 6002:7878
+    labels:
+      - homepage.group=Media Management
+      - homepage.name=Movies
+      - homepage.container=radarr
+      - homepage.server=my-docker
+      - homepage.description=Radarr
+      - homepage.href=http://${IP_ADDRESS_G}:6002
+      - com.centurylinklabs.watchtower.enable=true
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    <<: [*environment,*policy,*network]
+    volumes:
+      - ${SERVER_DATA_DIR}/sonarr/config:/config
+      - ${SERVER_STORAGE_DIR}/tv:/tv #optional
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
+    ports:
+      - 6003:8989
+    labels:
+      - homepage.group=Media Management
+      - homepage.name=Series
+      - homepage.container=sonarr
+      - homepage.server=my-docker
+      - homepage.description=Sonarr
+      - homepage.href=http://${IP_ADDRESS_G}:6003
+      - com.centurylinklabs.watchtower.enable=true
+

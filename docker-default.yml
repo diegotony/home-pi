@@ -1,0 +1,91 @@
+version: "3.3"
+
+x-user: &user
+  user: 1000:1000 # default
+ 
+x-environment: &environment
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=America/Guayaquil
+
+x-policy: &policy
+  restart: unless-stopped
+
+x-security: &security
+  security_opt:
+    - no-new-privileges:true
+
+x-network: &network
+  networks:
+    - home-network
+
+networks:
+  home-network:
+    driver: bridge
+  my-network:
+
+services:
+  local:
+    image: ghcr.io/benphelps/homepage:latest
+    container_name: local
+    <<: [*environment,*policy,*network]
+
+    ports:
+      - 80:3000
+    volumes:
+      - ${REPO_CONFIG_DIR}/configs:/app/config # Make sure your local config directory exists
+      - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
+      - ${REPO_CONFIG_DIR}/images:/app/public/images
+    labels:
+      - homepage.group=Admin
+      - homepage.name=Dashboard
+      - homepage.container=local
+      - homepage.server=my-docker
+      - homepage.description=Me Dashboard
+      - homepage.href=http://${IP_ADDRESS_G}
+      - com.centurylinklabs.watchtower.enable=true
+
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    <<: [*environment,*policy]
+    network_mode: 'host'
+    ports:
+      -  8096:8096/tcp
+    volumes:
+      - ${SERVER_DATA_DIR}/jellyfin/config:/config
+      - ${SERVER_DATA_DIR}/jellyfin/cache:/cache
+      - ${SERVER_STORAGE_DIR}:/media #optional
+      - ${SERVER_DATA_DIR}/jellyfin/media2:/media2:ro
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
+
+    labels:
+      - homepage.group=Streaming
+      - homepage.name=Watch
+      - homepage.container=jellyfin
+      - homepage.server=my-docker
+      - homepage.description=Jellyfin
+      - homepage.href=http://${IP_ADDRESS_G}:8096
+      - com.centurylinklabs.watchtower.enable=true
+
+
+  kavita:
+    image: kizaing/kavita:latest
+    container_name: kavita
+    <<: [*policy,*network]
+
+    volumes:
+      - ${SERVER_DATA_DIR}/kavita/config:/kavita/config
+      - ${SERVER_STORAGE_DIR}:/manga
+    ports:
+        - 8083:5000
+    restart: unless-stopped
+    labels:
+    - homepage.group=Streaming
+    - homepage.name=Reader
+    - homepage.container=kavita
+    - homepage.server=my-docker
+    - homepage.description=Kavita
+    - homepage.href=http://${IP_ADDRESS_G}:8083
+    - com.centurylinklabs.watchtower.enable=true

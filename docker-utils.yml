@@ -1,0 +1,143 @@
+version: "3.3"
+
+x-user: &user
+  user: 1000:1000 # default
+ 
+x-environment: &environment
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=America/Guayaquil
+
+x-policy: &policy
+  restart: unless-stopped
+
+x-security: &security
+  security_opt:
+    - no-new-privileges:true
+
+x-network: &network
+  networks:
+    - home-network
+
+networks:
+  home-network:
+    driver: bridge
+  my-network:
+
+services:
+  whoami:
+    image: containous/whoami:latest
+    container_name: whoami
+    <<: [*environment,*policy,*network,*security,*user]
+    ports:
+      - 9001:80
+    labels:
+      - homepage.group=Utils
+      - homepage.name=Whoami
+      - homepage.container=whoami
+      - homepage.server=my-docker
+      - homepage.description=Check InFormation
+      - homepage.href=http://${IP_ADDRESS_G}:9001
+      - com.centurylinklabs.watchtower.enable=true
+
+  filebrowser:
+    image: filebrowser/filebrowser:s6
+    container_name: filebrowser
+    <<: [*environment,*policy,*network,*security]
+    ports:
+      - 8001:80
+    volumes:
+      - ${SERVER_STORAGE_DIR}:/srv
+      - ${REPO_CONFIG_DIR}/assets/settings.json:/config/settings.json
+      # - ${REPO_CONFIG_DIR}/assets/filebrowser.db:/database/filebrowser.db
+    labels:
+      - homepage.group=Utils
+      - homepage.name=File Explorer
+      - homepage.container=filebrowser
+      - homepage.server=my-docker
+      - homepage.description=Filebrowser
+      - homepage.href=http://${IP_ADDRESS_G}:8001
+      - com.centurylinklabs.watchtower.enable=true
+
+  ngrok:
+    image: ngrok/ngrok:latest
+    container_name: ngrok
+    <<: [*environment,*policy,*network,*security]
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK}
+    command:
+      - "start"
+      - "--all"
+      - "--config"
+      - "/etc/ngrok.yml"
+    volumes:
+      - ${REPO_CONFIG_DIR}/configs/ngrok.yml:/etc/ngrok.yml
+    ports:
+      - 4040:4040
+    labels:
+      - homepage.group=Utils
+      - homepage.name=Tunnel
+      - homepage.container=ngrok
+      - homepage.server=my-docker
+      - homepage.description=Ngrok
+      - homepage.href=http://${IP_ADDRESS_G}:4040
+
+  pi.alert:
+    container_name: pialert
+    image: jokobsk/pi.alert:latest
+    <<: [*environment,*policy,*security]
+    environment:
+      - PORT=8097
+    network_mode: "host"
+    labels:
+      - homepage.group=Utils
+      - homepage.name=Checking Network
+      - homepage.container=pialert
+      - homepage.server=my-docker
+      - homepage.description=Pi-Alert
+      - homepage.href=http://${IP_ADDRESS_G}:8097
+
+  deluge:
+    image: lscr.io/linuxserver/deluge:latest
+    container_name: deluge
+    <<: [*environment,*policy,*network,*security]
+    environment:
+      - PASSWORD=/run/secrets/${PASSWORD}
+    volumes:
+      - ${SERVER_DATA_DIR}/deluge/config:/config
+      - ${SERVER_STORAGE_DIR}/downloads-deluge:/downloads
+
+    ports:
+      - 8112:8112
+      - 6881:6881
+      - 6881:6881/udp
+    labels:
+      - homepage.group=Utils
+      - homepage.name=Torrents
+      - homepage.container=deluge
+      - homepage.server=my-docker
+      - homepage.description=Download Torrents
+      - homepage.href=http://${IP_ADDRESS_G}:8112
+      - com.centurylinklabs.watchtower.enable=true
+  calibre:
+    image:  lscr.io/linuxserver/calibre:latest
+    container_name: calibre
+    <<: [*environment,*policy,*network]
+    ports:
+      - 8004:8080
+      - 8008:8081
+    volumes:
+      - ${SERVER_DATA_DIR}/calibre/config:/config
+      - ${SERVER_STORAGE_DIR}/mybooks:/books
+      - ${SERVER_STORAGE_DIR}/manga:/manga
+      - ${SERVER_STORAGE_DIR}/comics:/comics
+      - ${SERVER_STORAGE_DIR}/reduced-size:/reduced
+    labels:
+      - homepage.group=Utils
+      - homepage.name=Calibre
+      - homepage.container=calibre
+      - homepage.server=my-docker
+      - homepage.description=Management Books
+      - homepage.href=http://${IP_ADDRESS_G}:8004
+      - com.centurylinklabs.watchtower.enable=true

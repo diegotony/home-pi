@@ -1,0 +1,306 @@
+version: "3.3"
+
+x-user: &user
+  user: 1000:1000 # default
+ 
+x-environment: &environment
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=America/Guayaquil
+
+x-policy: &policy
+  restart: unless-stopped
+
+x-security: &security
+  security_opt:
+    - no-new-privileges:true
+
+x-network: &network
+  networks:
+    - home-network
+
+networks:
+  home-network:
+    driver: bridge
+  my-network:
+
+services:
+# Dashboard
+  local:
+      extends:
+         file: apps/homepage/common.yml
+         service: homepage
+
+  jellyfin:
+      extends:
+         file: apps/jellyfin/common.yml
+         service: jellyfin
+
+  kavita:
+      extends:
+         file: apps/kavita/common.yml
+         service: kavita
+
+
+# Media Management
+
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    <<: [*environment,*policy,*network]
+    volumes:
+      - ${SERVER_DATA_DIR}/bazarr/config:/config
+      - ${SERVER_STORAGE_DIR}/movies:/movies #optional
+      - ${SERVER_STORAGE_DIR}/tv:/tv #optional   
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
+
+    ports:
+      - 6001:6767
+    labels:
+      - homepage.group=Media Management
+      - homepage.name=Subtitles
+      - homepage.container=bazarr
+      - homepage.server=my-docker
+      - homepage.description=Bazarr
+      - homepage.href=http://${IP_ADDRESS_G}:6001
+      - com.centurylinklabs.watchtower.enable=true
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    <<: [*environment,*policy,*network]
+    volumes:
+      - ${SERVER_DATA_DIR}/overseerr/config:/config
+      - ${SERVER_STORAGE_DIR}/movies:/movies #optional
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
+    ports:
+      - 6002:7878
+    labels:
+      - homepage.group=Media Management
+      - homepage.name=Movies
+      - homepage.container=radarr
+      - homepage.server=my-docker
+      - homepage.description=Radarr
+      - homepage.href=http://${IP_ADDRESS_G}:6002
+      - com.centurylinklabs.watchtower.enable=true
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    <<: [*environment,*policy,*network]
+    volumes:
+      - ${SERVER_DATA_DIR}/sonarr/config:/config
+      - ${SERVER_STORAGE_DIR}/tv:/tv #optional
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
+    ports:
+      - 6003:8989
+    labels:
+      - homepage.group=Media Management
+      - homepage.name=Series
+      - homepage.container=sonarr
+      - homepage.server=my-docker
+      - homepage.description=Sonarr
+      - homepage.href=http://${IP_ADDRESS_G}:6003
+      - com.centurylinklabs.watchtower.enable=true
+
+# Indexers
+
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    <<: [*environment,*policy,*network,*security]
+    environment:
+      - AUTO_UPDATE=true #optional
+      - RUN_OPTS= #optional
+    volumes:
+      - ${SERVER_DATA_DIR}/jackett/config:/config
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads #optional
+    ports:
+      - 7009:9117
+
+    labels:
+      - homepage.group=Media Management
+      - homepage.name=Indexer
+      - homepage.container=jackett
+      - homepage.server=my-docker
+      - homepage.description=jackett
+      - homepage.href=http://${IP_ADDRESS_G}:7009
+      - com.centurylinklabs.watchtower.enable=true
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:develop
+    container_name: prowlarr
+    <<: [*environment,*policy,*network,*security]
+    volumes:
+      -  ${SERVER_DATA_DIR}/prowlarr/config:/config
+    ports:
+      - 7001:9696
+    restart: unless-stopped
+    labels:
+      - homepage.group=Media Management
+      - homepage.name=Indexer
+      - homepage.container=prowlarr
+      - homepage.server=my-docker
+      - homepage.description=Prowlarr
+      - homepage.href=http://${IP_ADDRESS_G}:7001
+      - com.centurylinklabs.watchtower.enable=true
+
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    <<: [*environment,*policy,*network,*security]
+
+    volumes:
+      - ${SERVER_DATA_DIR}/transmission/config:/config
+      - ${SERVER_STORAGE_DIR}/downloads:/downloads
+      - ${SERVER_STORAGE_DIR}/watch:/watch
+    ports:
+      - 7003:9091
+      - 51413:51413
+      - 51413:51413/udp
+    labels:
+      - homepage.group=Media Management
+      - homepage.name=Transmission
+      - homepage.container=transmission
+      - homepage.server=my-docker
+      - homepage.description=Download Torrents
+      - homepage.href=http://${IP_ADDRESS_G}:7003
+      - com.centurylinklabs.watchtower.enable=true
+  
+  metube:
+    image: alexta69/metube
+    container_name: metube
+    <<: [*environment,*policy,*network,*security]
+    ports:
+      - "8081:8081"
+    volumes:
+      - ${SERVER_STORAGE_DIR}/downloads/youtube:/downloads
+    labels:
+      - homepage.group=Utils
+      - homepage.name=Metube
+      - homepage.container=metube
+      - homepage.server=my-docker
+      - homepage.description=Download Youtube
+      - homepage.href=http://${IP_ADDRESS_G}:8081
+      - com.centurylinklabs.watchtower.enable=true
+
+# Server Admnin
+
+  whoami:
+    image: containous/whoami:latest
+    container_name: whoami
+    <<: [*environment,*policy,*network,*security,*user]
+    ports:
+      - 9001:80
+    labels:
+      - homepage.group=Admin
+      - homepage.name=Whoami
+      - homepage.container=whoami
+      - homepage.server=my-docker
+      - homepage.description=Check InFormation
+      - homepage.href=http://${IP_ADDRESS_G}:9001
+      - com.centurylinklabs.watchtower.enable=true
+
+  filebrowser:
+    image: filebrowser/filebrowser:s6
+    container_name: filebrowser
+    <<: [*environment,*policy,*network,*security]
+    ports:
+      - 8001:80
+    volumes:
+      - ${SERVER_STORAGE_DIR}:/srv
+      - ${REPO_CONFIG_DIR}/assets/settings.json:/config/settings.json
+      # - ${REPO_CONFIG_DIR}/assets/filebrowser.db:/database/filebrowser.db
+    labels:
+      - homepage.group=Utils
+      - homepage.name=File Explorer
+      - homepage.container=filebrowser
+      - homepage.server=my-docker
+      - homepage.description=Filebrowser
+      - homepage.href=http://${IP_ADDRESS_G}:8001
+      - com.centurylinklabs.watchtower.enable=true
+
+  ngrok:
+    image: ngrok/ngrok:latest
+    container_name: ngrok
+    <<: [*environment,*policy,*network,*security]
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK}
+    command:
+      - "start"
+      - "--all"
+      - "--config"
+      - "/etc/ngrok.yml"
+    volumes:
+      - ${REPO_CONFIG_DIR}/configs/ngrok.yml:/etc/ngrok.yml
+    ports:
+      - 4040:4040
+    labels:
+      - homepage.group=Admin
+      - homepage.name=Tunnel
+      - homepage.container=ngrok
+      - homepage.server=my-docker
+      - homepage.description=Ngrok
+      - homepage.href=http://${IP_ADDRESS_G}:4040
+
+  pi.alert:
+    container_name: pialert
+    image: jokobsk/pi.alert:latest
+    <<: [*environment,*policy,*security]
+    environment:
+      - PORT=8097
+    network_mode: "host"
+    labels:
+      - homepage.group=Admin
+      - homepage.name=Checking Network
+      - homepage.container=pialert
+      - homepage.server=my-docker
+      - homepage.description=Pi-Alert
+      - homepage.href=http://${IP_ADDRESS_G}:8097
+
+  deluge:
+    image: lscr.io/linuxserver/deluge:latest
+    container_name: deluge
+    <<: [*environment,*policy,*network,*security]
+    environment:
+      - PASSWORD=/run/secrets/${PASSWORD}
+    volumes:
+      - ${SERVER_DATA_DIR}/deluge/config:/config
+      - ${SERVER_STORAGE_DIR}/downloads-deluge:/downloads
+
+    ports:
+      - 8112:8112
+      - 6881:6881
+      - 6881:6881/udp
+    labels:
+      - homepage.group=Utils
+      - homepage.name=Torrents
+      - homepage.container=deluge
+      - homepage.server=my-docker
+      - homepage.description=Download Torrents
+      - homepage.href=http://${IP_ADDRESS_G}:8112
+      - com.centurylinklabs.watchtower.enable=true
+
+# Utils
+  calibre:
+    image:  lscr.io/linuxserver/calibre:latest
+    container_name: calibre
+    <<: [*environment,*policy,*network]
+    ports:
+      - 8004:8080
+      - 8008:8081
+    volumes:
+      - ${SERVER_DATA_DIR}/calibre/config:/config
+      - ${SERVER_STORAGE_DIR}/mybooks:/books
+      - ${SERVER_STORAGE_DIR}/manga:/manga
+      - ${SERVER_STORAGE_DIR}/comics:/comics
+      - ${SERVER_STORAGE_DIR}/reduced-size:/reduced
+    labels:
+      - homepage.group=Utils
+      - homepage.name=Calibre
+      - homepage.container=calibre
+      - homepage.server=my-docker
+      - homepage.description=Management Books
+      - homepage.href=http://${IP_ADDRESS_G}:8004
+      - com.centurylinklabs.watchtower.enable=true
